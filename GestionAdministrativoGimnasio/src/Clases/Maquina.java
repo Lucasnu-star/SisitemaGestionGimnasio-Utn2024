@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Maquina {
 
     //Atributos
-    private String id;
+    private int id;
     private String nombre;
     private eTIPOMAQUINA tipoMaquina;
     private boolean estadoMaquina; // True o False
