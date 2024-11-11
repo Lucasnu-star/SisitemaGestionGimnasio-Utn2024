@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 
 
-public class Gimnasio {
+public final class Gimnasio {
 
     //Atributos
     private String nombreGimnasio;

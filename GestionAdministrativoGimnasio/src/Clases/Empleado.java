@@ -1,20 +1,19 @@
 package Clases;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * Clase Empleado, esta clase es...
  */
-public class Empleado  extends Usuario{
+public abstract class Empleado  extends Usuario{
 
     //Atributos
     private int salario;
-    private Date horario; // Ver como plasmar horarios
+    private String horario; // Ver como plasmar horarios
 
     //Constuctor
-    public Empleado(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, Date horario) {
+    public Empleado(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario) {
         super(nombre, apellido, documento, fechaNacimiento);
         this.salario = salario;
         this.horario = horario;
@@ -24,7 +23,7 @@ public class Empleado  extends Usuario{
     public int getSalario() {
         return salario;
     }
-    public Date getHorario() {
+    public String getHorario() {
         return horario;
     }
 

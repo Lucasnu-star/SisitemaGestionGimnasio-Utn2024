@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  *Clase Recepcionista, esta clase...
  */
-public class Recepcionista extends Empleado {
+public final class Recepcionista extends Empleado {
 
     //Atributos
     GestionGimnasio<Entrenador> gestionEntrenadores;
@@ -17,7 +17,7 @@ public class Recepcionista extends Empleado {
     GestionGimnasio<PersonalMantenimiento> gestionPersonalMantenimiento;
 
     //Constructor
-    public Recepcionista(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, Date horario) {
+    public Recepcionista(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
         this.gestionEntrenadores = new GestionGimnasio<>();
         this.gestionMiembros = new GestionGimnasio<>();

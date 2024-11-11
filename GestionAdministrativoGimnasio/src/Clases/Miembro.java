@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 
 //Clase Usuario
-public class Miembro extends Usuario{
+public final class Miembro extends Usuario{
 
     //Atributos
     private Membresia membresia;

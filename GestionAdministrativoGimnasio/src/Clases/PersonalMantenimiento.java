@@ -8,10 +8,10 @@ import java.util.Date;
  */
 
 
-public class PersonalMantenimiento extends Empleado {
+public final class PersonalMantenimiento extends Empleado {
 
     //Constructor
-    public PersonalMantenimiento(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, Date horario) {
+    public PersonalMantenimiento(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
     }
 

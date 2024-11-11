@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import Enums.eEspecialidad;
 
-public class Especialidad {
+public final class Especialidad {
 
     // Atributos
     private String descripcion;

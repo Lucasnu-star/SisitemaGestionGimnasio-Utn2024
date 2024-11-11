@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Clase Maquina, esta clase..
  */
-public class Maquina {
+public final class Maquina {
 
     //Atributos
     private int id;

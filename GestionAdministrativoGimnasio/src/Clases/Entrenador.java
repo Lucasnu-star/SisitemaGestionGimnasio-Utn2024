@@ -8,7 +8,7 @@ import java.util.*;
  */
 
 
-public class Entrenador extends Empleado {
+public final class Entrenador extends Empleado {
 
     //Atributos
     private Especialidad especialidad;
@@ -16,7 +16,7 @@ public class Entrenador extends Empleado {
     private List<Miembro> miembrosAsignados;
 
     //Constuctor
-    public Entrenador(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, Date horario, Especialidad especialidad) {
+    public Entrenador(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario, Especialidad especialidad) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
         this.certificados = new HashSet<>(); // Ver
         this.especialidad = especialidad;
