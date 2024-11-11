@@ -14,7 +14,7 @@ public final class Gimnasio {
     //Atributos
     private String nombreGimnasio;
     private String direccionGimnasio;
-    private int capacidadGimnasio;
+    private float capacidadGimnasio;
     private List<Especialidad> especialidadesGimnasio;
 
     //Constructores
