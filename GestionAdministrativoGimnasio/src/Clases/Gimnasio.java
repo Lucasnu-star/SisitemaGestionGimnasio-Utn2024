@@ -34,7 +34,7 @@ public final class Gimnasio {
     public String getDireccionGimnasio() {
         return direccionGimnasio;
     }
-    public int getCapacidadGimnasio() {
+    public float getCapacidadGimnasio() {
         return capacidadGimnasio;
     }
     public List<Especialidad> getEspecialidadesGimnasio() {
