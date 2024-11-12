@@ -13,13 +13,13 @@ public final class Membresia {
     //Atributos
     private String descripcion;
     private eTIPOMEMBRESIA eTipomembresia;
-    private long constoMensual;
+    private long costoMensual;
 
     //Constuctor
     public Membresia(String descripcion, eTIPOMEMBRESIA eTipomembresia, long constoMensual) {
         this.descripcion = descripcion;
         this.eTipomembresia = eTipomembresia;
-        this.constoMensual = constoMensual;
+        this.costoMensual = constoMensual;
     }
 
     //Getters
@@ -33,7 +33,7 @@ public final class Membresia {
     }
 
     public long getConstoMensual() {
-        return constoMensual;
+        return costoMensual;
     }
 
     //Setters
@@ -52,11 +52,11 @@ public final class Membresia {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Membresia membresia = (Membresia) o;
-        return constoMensual == membresia.constoMensual && Objects.equals(descripcion, membresia.descripcion) && Objects.equals(eTipomembresia, membresia.eTipomembresia);
+        return costoMensual == membresia.costoMensual && Objects.equals(descripcion, membresia.descripcion) && Objects.equals(eTipomembresia, membresia.eTipomembresia);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion, eTipomembresia, constoMensual);
+        return Objects.hash(descripcion, eTipomembresia, costoMensual);
     }
 
     //ToString
@@ -65,6 +65,6 @@ public final class Membresia {
         return "Membresia " +
                 "descripcion='" + descripcion + '\'' +
                 ", tipomembresia=" + eTipomembresia +
-                ", constoMensual=" + constoMensual;
+                ", constoMensual=" + costoMensual;
     }
 }
