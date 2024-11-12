@@ -58,7 +58,7 @@ public final class Especialidad {
     }
 
     // Mostrar entrenadores por especialidad
-    public void mostrarEntrenadorPorEspecialidad(Especialidad tipo, GestionGimnasio gestionGym) {
+    public void mostrarEntrenadorPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
         System.out.println("Entrenadores de la especialidad: " + tipo);
         List<Entrenador> todosEntrenadores = gestionGym.consultar(Entrenador.class);
 
@@ -70,7 +70,7 @@ public final class Especialidad {
     }
 
     // Mostrar miembros por especialidad
-    public void mostrarMiembrosPorEspecialidad(Especialidad tipo, GestionGimnasio gestionGym) {
+    public void mostrarMiembrosPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
         System.out.println("Miembros interesados en la especialidad: " + tipo);
         List<Miembro> todosMiembros = gestionGym.consultar(Miembro.class);
 

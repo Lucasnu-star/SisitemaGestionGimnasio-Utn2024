@@ -2,29 +2,29 @@ package Clases;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Clase GestionGimnasio, esta clase...
  *
  */
-public class GestionGimnasio<T>  {
+public class GestionGenericaGimnasio<T>  {
     //Atributo
-    List<T> gestionUsuario;
+    TreeMap<String, T> gestionUsuario;
 
     //Contructor
-    public GestionGimnasio() {
-        this.gestionUsuario = new ArrayList<>();
+    public GestionGenericaGimnasio() {
+        this.gestionUsuario = new TreeMap<>();
     }
 
     //Getter
-    public List<T> getGestionUsuario() {
+    public TreeMap<String, T> getGestionUsuario() {
         return gestionUsuario;
     }
 
     //Setter
-    public void setGestionUsuario(List<T> gestionUsuario) {
-        this.gestionUsuario = gestionUsuario;
-    }
+
 
     //ToString
     @Override
@@ -32,15 +32,15 @@ public class GestionGimnasio<T>  {
         return "GestionGimnasio " +
                 "gestionUsuario=" + gestionUsuario;
     }
-    public void agregar(T obj) {
-        gestionUsuario.add(obj);
+    public void agregar(String clave, T obj) {
+        gestionUsuario.put(clave, obj);
         System.out.println("Elemento agregado: " + obj);
     }
 
     // Metdo para eliminar un elemento
-    public void eliminar(T obj) {
-        if (gestionUsuario.remove(obj)) {
-            System.out.println("Elemento eliminado: " + obj);
+    public void eliminar(String clave) {
+        if (gestionUsuario.remove(clave) != null) {
+            System.out.println("Elemento eliminado: " + clave);
         } else {
             System.out.println("El elemento no se encontró en la lista.");
         }
@@ -49,7 +49,7 @@ public class GestionGimnasio<T>  {
     // Metodo para consultar los elementos de un tipo especifico
     public List<T> consultar(Class<T> clase) {
         List<T> result = new ArrayList<>();
-        for (T obj : gestionUsuario) {
+        for (T obj : gestionUsuario.values()) {
             if (clase.isInstance(obj)) {
                 result.add(obj);
             }
@@ -60,8 +60,8 @@ public class GestionGimnasio<T>  {
     // Metodo para mostrar elementos de la lista
     public void mostrarTodos() {
         System.out.println("Lista de elementos en GestionGym:");
-        for (T obj : gestionUsuario) {
-            System.out.println(obj);
+        for (Map.Entry<String, T> entrada : gestionUsuario.entrySet()){
+
         }
     }
 }

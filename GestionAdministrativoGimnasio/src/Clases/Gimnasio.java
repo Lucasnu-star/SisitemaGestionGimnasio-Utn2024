@@ -15,6 +15,10 @@ public final class Gimnasio {
     private String nombreGimnasio;
     private String direccionGimnasio;
     private int capacidadGimnasio;
+    private GestionGenericaGimnasio<Entrenador> gestionEntrenadores;
+    private GestionGenericaGimnasio<Miembro> gestionMiembros;
+    private GestionGenericaGimnasio<PersonalMantenimiento> gestionPersonalMantenimiento;
+    private GestionGenericaGimnasio<Maquina> gestionMaquinas;
     private List<Especialidad> especialidadesGimnasio;
 
     //Constructores
@@ -22,21 +26,50 @@ public final class Gimnasio {
         this.nombreGimnasio = nombreGimnasio;
         this.capacidadGimnasio = capacidadGimnasio;
         this.direccionGimnasio = direccionGimnasio;
-        this.especialidadesGimnasio =  new ArrayList<>();  // Ver
+        this.gestionEntrenadores = new GestionGenericaGimnasio<>();
+        this.gestionMiembros = new GestionGenericaGimnasio<>();
+        this.gestionPersonalMantenimiento = new GestionGenericaGimnasio<>();
+        this.gestionMaquinas = new GestionGenericaGimnasio<>();
+        this.especialidadesGimnasio =  new ArrayList<>(); // Ver
     }
+
     public Gimnasio() {
+        this.gestionEntrenadores = new GestionGenericaGimnasio<>();
+        this.gestionMiembros = new GestionGenericaGimnasio<>();
+        this.gestionPersonalMantenimiento = new GestionGenericaGimnasio<>();
+        this.gestionMaquinas = new GestionGenericaGimnasio<>();
+        this.especialidadesGimnasio =  new ArrayList<>();
     }
 
     //Getters
     public String getNombreGimnasio() {
         return nombreGimnasio;
     }
+
     public String getDireccionGimnasio() {
         return direccionGimnasio;
     }
+
     public int getCapacidadGimnasio() {
         return capacidadGimnasio;
     }
+
+    public GestionGenericaGimnasio<Entrenador> getGestionEntrenadores() {
+        return gestionEntrenadores;
+    }
+
+    public GestionGenericaGimnasio<Miembro> getGestionMiembros() {
+        return gestionMiembros;
+    }
+
+    public GestionGenericaGimnasio<PersonalMantenimiento> getGestionPersonalMantenimiento() {
+        return gestionPersonalMantenimiento;
+    }
+
+    public GestionGenericaGimnasio<Maquina> getGestionMaquinas() {
+        return gestionMaquinas;
+    }
+
     public List<Especialidad> getEspecialidadesGimnasio() {
         return especialidadesGimnasio;
     }
@@ -45,14 +78,13 @@ public final class Gimnasio {
     public void setNombreGimnasio(String nombreGimnasio) {
         this.nombreGimnasio = nombreGimnasio;
     }
+
     public void setDireccionGimnasio(String direccionGimnasio) {
         this.direccionGimnasio = direccionGimnasio;
     }
+
     public void setCapacidadGimnasio(int capacidadGimnasio) {
         this.capacidadGimnasio = capacidadGimnasio;
-    }
-    public void setEspecialidadesGimnasio(List<Especialidad> especialidadesGimnasio) {
-        this.especialidadesGimnasio = especialidadesGimnasio;
     }
 
     //HashCode && Equals
@@ -61,11 +93,12 @@ public final class Gimnasio {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Gimnasio gimnasio = (Gimnasio) o;
-        return capacidadGimnasio == gimnasio.capacidadGimnasio && Objects.equals(nombreGimnasio, gimnasio.nombreGimnasio) && Objects.equals(direccionGimnasio, gimnasio.direccionGimnasio) && Objects.equals(especialidadesGimnasio, gimnasio.especialidadesGimnasio);
+        return capacidadGimnasio == gimnasio.capacidadGimnasio && Objects.equals(nombreGimnasio, gimnasio.nombreGimnasio) && Objects.equals(direccionGimnasio, gimnasio.direccionGimnasio);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(nombreGimnasio, direccionGimnasio, capacidadGimnasio, especialidadesGimnasio);
+        return Objects.hash(nombreGimnasio, direccionGimnasio, capacidadGimnasio);
     }
 
     //ToString
