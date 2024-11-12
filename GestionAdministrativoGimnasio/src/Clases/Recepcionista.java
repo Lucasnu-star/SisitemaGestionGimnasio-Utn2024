@@ -10,7 +10,6 @@ import java.util.Objects;
  */
 public final class Recepcionista extends Empleado {
 
-    //Atributos
 
 
     //Constructor
@@ -19,16 +18,6 @@ public final class Recepcionista extends Empleado {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
     }
 
-
-    //Getters
-
-
-
-    //Setters
-
-
-
-    //Equals && HashCode
 
 
 
@@ -40,7 +29,7 @@ public final class Recepcionista extends Empleado {
     }
 
     // Verificando membresia del miembro.
-    public void verificarMembresia(Miembro miembro) throws ExcepcionMembresiaExpirada {
+    public String verificarMembresia(Miembro miembro) throws ExcepcionMembresiaExpirada {
         if (miembro == null) {
             throw new IllegalArgumentException("El miembro no puede ser nulo.");
         }
@@ -49,7 +38,7 @@ public final class Recepcionista extends Empleado {
             throw new ExcepcionMembresiaExpirada("La membresía del miembro " + miembro.getNombre() + " ha expirado.");
         }
 
-        System.out.println("La membresía del miembro " + miembro.getNombre() + " está activa.");
+        return  "La membresía del miembro " + miembro.getNombre() + " está activa.";
     }
 
     //Metodos

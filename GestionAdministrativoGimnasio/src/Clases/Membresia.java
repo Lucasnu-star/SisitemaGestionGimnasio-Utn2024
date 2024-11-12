@@ -8,7 +8,7 @@ import java.util.Objects;
  * Clase Membresia, esta clase...
  */
 
-public final class    Membresia {
+public final class Membresia {
 
     //Atributos
     private String descripcion;
