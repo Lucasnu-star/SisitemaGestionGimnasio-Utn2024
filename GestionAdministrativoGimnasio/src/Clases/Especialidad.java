@@ -60,7 +60,7 @@ public final class Especialidad {
     // Mostrar entrenadores por especialidad
     public void mostrarEntrenadorPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
         System.out.println("Entrenadores de la especialidad: " + tipo);
-        List<Entrenador> todosEntrenadores = gestionGym.consultar(Entrenador.class);
+        List<Entrenador> todosEntrenadores = gestionGym.consultarPorClase(Entrenador.class);
 
         for (Entrenador entrenador : todosEntrenadores) {
             if (entrenador.getEspecialidad().equals(tipo.getEspecialidad())) {
@@ -72,7 +72,7 @@ public final class Especialidad {
     // Mostrar miembros por especialidad
     public void mostrarMiembrosPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
         System.out.println("Miembros interesados en la especialidad: " + tipo);
-        List<Miembro> todosMiembros = gestionGym.consultar(Miembro.class);
+        List<Miembro> todosMiembros = gestionGym.consultarPorClase(Miembro.class);
 
         for (Miembro miembro : todosMiembros) {
             if (miembro.getEntrenadorAsingado().getEspecialidad().equals(tipo.getEspecialidad())) {

@@ -105,6 +105,8 @@ public final class Entrenador extends Empleado {
         }
     }
 
+    //calcular la cantidad de miembros por entrenador
+    public int cantMiembrosxEntrenador(){return miembrosAsignados.size();}
 }
 
 

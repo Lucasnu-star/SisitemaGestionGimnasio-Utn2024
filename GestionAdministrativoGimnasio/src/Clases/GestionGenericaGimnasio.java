@@ -47,7 +47,7 @@ public class GestionGenericaGimnasio<T>  {
     }
 
     // Metodo para consultar los elementos de un tipo especifico
-    public List<T> consultar(Class<T> clase) {
+    public List<T> consultarPorClase(Class<T> clase) {
         List<T> result = new ArrayList<>();
         for (T obj : gestionUsuario.values()) {
             if (clase.isInstance(obj)) {
@@ -63,5 +63,9 @@ public class GestionGenericaGimnasio<T>  {
         for (Map.Entry<String, T> entrada : gestionUsuario.entrySet()){
 
         }
+    }
+    // consultar por clave
+    public T consultar (String clave){
+        return gestionUsuario.get(clave);
     }
 }
