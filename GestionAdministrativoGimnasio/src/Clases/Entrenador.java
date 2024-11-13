@@ -105,6 +105,17 @@ public final class Entrenador extends Empleado {
         }
     }
 
+    public void eliminarMiembro(Miembro miembro)
+    {
+        if (miembrosAsignados.contains(miembro))
+        {
+            miembrosAsignados.remove(miembro);
+        }else
+        {
+            System.out.println("El miembro no fue encontrado en la lista de miembros del entrenador");
+        }
+    }
+
     //calcular la cantidad de miembros por entrenador
     public int cantMiembrosxEntrenador(){return miembrosAsignados.size();}
 }

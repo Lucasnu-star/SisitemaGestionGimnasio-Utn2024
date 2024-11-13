@@ -1,6 +1,7 @@
 package Clases;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 /**
@@ -74,5 +75,13 @@ public abstract class Usuario {
     }
 
     //Metodos
+
+    public int calcularEdad() {
+        if (fechaNacimiento != null) {
+            return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+        }
+        return 0;
+    }
+
 
 }

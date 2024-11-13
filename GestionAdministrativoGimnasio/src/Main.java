@@ -44,8 +44,6 @@ public class Main {
         Miembro miembro9 = new Miembro("Fernando", "Romero", "99999999", LocalDate.of(1995, 9, 20), membresiaBasica, entrenador4, true, LocalDate.of(2023, 9, 30));
         Miembro miembro10 = new Miembro("Patricia", "Herrera", "10101010", LocalDate.of(1991, 10, 25), membresiaPremium, entrenador3, false, LocalDate.of(2023, 10, 15));
 
-
-
         //Creacion instancias Personal de Mantenimiento
         PersonalMantenimiento mantenimiento1 = new PersonalMantenimiento("Juan", "Gómez", "100112233", LocalDate.of(1980, 3, 14), 2500, "08:00 - 16:00");
         PersonalMantenimiento mantenimiento2 = new PersonalMantenimiento("Laura", "Martínez", "223344556", LocalDate.of(1985, 7, 22), 2700, "10:00 - 18:00");
@@ -54,9 +52,19 @@ public class Main {
 
 
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador1.getDocumento() , entrenador1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores() , entrenador2.getDocumento() , entrenador2);
         System.out.println("++++");
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro1.getDocumento() , miembro1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro2.getDocumento() , miembro2);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento1.getDocumento() , mantenimiento1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento2.getDocumento() , mantenimiento2);
+        JSONArchivos.exportarEntrenadoresAJson(GimnasioUTN);
+        JSONArchivos.exportarListaEntrenadores(GimnasioUTN);
+        JSONArchivos.exportarMiembrosAJson(GimnasioUTN);
+        JSONArchivos.exportarListaMiembros(GimnasioUTN);
+        JSONArchivos.exportarPersonalMantenimientoAJson(GimnasioUTN);
+        JSONArchivos.exportarListaPersonalMantenimiento(GimnasioUTN);
+        System.out.println(GimnasioUTN.getGestionPersonalMantenimiento().toString());
 
-
-}
+    }
 }
