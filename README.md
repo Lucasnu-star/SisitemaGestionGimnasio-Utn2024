@@ -27,6 +27,7 @@
   <li>📝 Gestión de clases y especialidades</li>
   <li>🏋️‍♂️ Administración de roles administrativos</li>
   * En entrenador se agregaron los metodos: ConsultarMiembro, AñadirCertificado
+  *Metodos en la clase Entrenador, Recepcionista y PersonalMantenimiento, creacion de la clase Reporte.
 </ul>
 <h2>🎯 Próximos Pasos 🎯</h2>
 <ul>
