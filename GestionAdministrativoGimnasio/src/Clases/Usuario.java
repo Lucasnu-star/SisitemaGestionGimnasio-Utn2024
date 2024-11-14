@@ -22,6 +22,9 @@ public abstract class Usuario {
         this.documento = documento;
         this.fechaNacimiento = fechaNacimiento;
     }
+    public Usuario() {
+
+    }
 
     //Getters
     public String getNombre() {

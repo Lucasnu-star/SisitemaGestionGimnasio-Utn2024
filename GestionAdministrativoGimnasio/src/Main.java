@@ -66,5 +66,14 @@ public class Main {
         JSONArchivos.exportarListaPersonalMantenimiento(GimnasioUTN);
         System.out.println(GimnasioUTN.getGestionPersonalMantenimiento().toString());
 
+        JSONArchivos.importarMiembrosDesdeJson(GimnasioUTN);
+
+        // Verificar si los miembros fueron correctamente importados
+        System.out.println("Miembros en el gimnasio:");
+        for (Miembro miembro : GimnasioUTN.getGestionMiembros().getGestionUsuario().values()) {
+            System.out.println("Nombre: " + miembro.getNombre() +
+                    ", Membresía: " + miembro.getMembresia().getTipomembresia());
+        }
     }
-}
+
+    }

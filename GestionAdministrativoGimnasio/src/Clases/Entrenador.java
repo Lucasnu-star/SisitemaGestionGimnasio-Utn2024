@@ -23,6 +23,7 @@ public final class Entrenador extends Empleado {
         this.miembrosAsignados = new ArrayList<>();
     }
 
+
     //Getters
 
     public List<Miembro> getMiembrosAsignados() {
