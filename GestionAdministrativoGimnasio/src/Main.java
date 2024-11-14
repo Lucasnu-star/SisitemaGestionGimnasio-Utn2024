@@ -9,9 +9,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        //Creacion instancia Gimnasio
+//Creacion instancia Gimnasio
         Gimnasio GimnasioUTN = new Gimnasio("GimnasioUTN", 50, "Av. Dorrego 281");
+
+
         //Creacion instancias Recepcionistas
         Recepcionista recepcionista1 = new Recepcionista("Carlos", "Pérez", "12345678", LocalDate.of(1990, 5, 15), 5700, "08:00 a 12:00");
         Recepcionista recepcionista2 = new Recepcionista("Ana", "González", "87654321", LocalDate.of(1985, 12, 5), 4500, "12:00 a 16:00");
@@ -49,14 +50,14 @@ public class Main {
         PersonalMantenimiento mantenimiento2 = new PersonalMantenimiento("Laura", "Martínez", "223344556", LocalDate.of(1985, 7, 22), 2700, "10:00 - 18:00");
 
 
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador1.getDocumento(), entrenador1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador2.getDocumento(), entrenador2);
+
         System.out.println("++++");
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro1.getDocumento(), miembro1);
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro2.getDocumento(), miembro2);
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento1.getDocumento(), mantenimiento1);
         recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento2.getDocumento(), mantenimiento2);
 
+        /*
         //se exportan todos los datos en distintos archivos
         JSONArchivos.exportarDatosGimnasio(GimnasioUTN);
         JSONArchivos.exportarEntrenadoresAJson(GimnasioUTN);
@@ -66,11 +67,13 @@ public class Main {
         JSONArchivos.exportarPersonalMantenimientoAJson(GimnasioUTN);
         JSONArchivos.exportarListaPersonalMantenimiento(GimnasioUTN);
 
+         */
+
         System.out.println(GimnasioUTN.getGestionPersonalMantenimiento().toString());
 
         //se tiene que crear otro gimnasio en donde se reciben sus datos
         Gimnasio gimnasio = JSONArchivos.importarDatosGimnasioDesdeJson();
-
+/*
         // Verificar los datos del gimnasio
         System.out.println("Datos del gimnasio: ");
         System.out.println(gimnasio);
@@ -85,8 +88,20 @@ public class Main {
                     ", Membresía: " + miembro.getMembresia().getTipomembresia()+ "fecha" + miembro.getFechaNacimiento()+ "apeliido"+miembro.getApellido() + "documento"+miembro.getDocumento());
         }
 
-        Scanner scanner = new Scanner(System.in);
+ */
+
+
+        System.out.println(GimnasioUTN.getGestionEntrenadores());
+
+        Menu.MenuPrincipal(GimnasioUTN);
+
+
+
+
+
+
 
     }
+}
 
 

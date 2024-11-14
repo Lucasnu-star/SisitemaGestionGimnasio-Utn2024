@@ -3,6 +3,8 @@ package Clases;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.crypto.interfaces.PBEKey;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -90,6 +92,26 @@ public final class Gimnasio {
         this.capacidadGimnasio = capacidadGimnasio;
     }
 
+    public void setGestionEntrenadores(GestionGenericaGimnasio<Entrenador> gestionEntrenadores) {
+        this.gestionEntrenadores = gestionEntrenadores;
+    }
+
+    public void setGestionMiembros(GestionGenericaGimnasio<Miembro> gestionMiembros) {
+        this.gestionMiembros = gestionMiembros;
+    }
+
+    public void setGestionMaquinas(GestionGenericaGimnasio<Maquina> gestionMaquinas) {
+        this.gestionMaquinas = gestionMaquinas;
+    }
+
+    public void setEspecialidadesGimnasio(List<Especialidad> especialidadesGimnasio) {
+        this.especialidadesGimnasio = especialidadesGimnasio;
+    }
+
+    public void setGestionPersonalMantenimiento(GestionGenericaGimnasio<PersonalMantenimiento> gestionPersonalMantenimiento) {
+        this.gestionPersonalMantenimiento = gestionPersonalMantenimiento;
+    }
+
     //HashCode && Equals
     @Override
     public boolean equals(Object o) {
@@ -115,5 +137,4 @@ public final class Gimnasio {
     }
 
     //Metodos
-
     }

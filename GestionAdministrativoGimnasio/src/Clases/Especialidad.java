@@ -81,14 +81,19 @@ public final class Especialidad {
         }
     }
 
+
+
+
      */
+
     // Método para convertir un JSONObject en una instancia de Especialidad
     public static Especialidad fromJSONObject(JSONObject jsonObject) {
-        String nombre = jsonObject.getString("nombre");
+
+        String descripcion = jsonObject.getString("descripcion");
         // Convertir el String de especialidad en el enum eEspecialidad
         eEspecialidad especialidad = eEspecialidad.valueOf(jsonObject.getString("especialidad"));
 
-        return new Especialidad(nombre, especialidad);
+        return new Especialidad(descripcion, especialidad);
     }
 
 

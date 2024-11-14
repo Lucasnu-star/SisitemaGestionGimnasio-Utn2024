@@ -2,6 +2,7 @@ package Clases;
 
 import java.time.LocalDate;
 import java.util.*;
+import Enums.eEspecialidad;
 
 /**
  * Clase GestionGimnasio, esta clase...
@@ -56,12 +57,7 @@ public class GestionGenericaGimnasio<T>  {
     }
 
     // Metodo para mostrar elementos de la lista
-    public void mostrarTodos() {
-        System.out.println("Lista de elementos en GestionGym:");
-        for (Map.Entry<String, T> entrada : gestionUsuario.entrySet()){
 
-        }
-    }
     // consultar por clave
     public T consultar (String clave){
         return gestionUsuario.get(clave);
@@ -79,9 +75,24 @@ public class GestionGenericaGimnasio<T>  {
         entrenador.setDocumento(entrada.nextLine());
         System.out.println("ingrese fecha de nacimiento");
         entrenador.setFechaNacimiento(LocalDate.parse(entrada.nextLine()));
+        // Mostrar las especialidades disponibles
+        System.out.println("Seleccione la especialidad:");
+        eEspecialidad[] especialidades = eEspecialidad.values();
+        for (int i = 0; i < especialidades.length; i++) {
+            System.out.println((i + 1) + ". " + especialidades[i].name());
+        }
+
+        int opcionEspecialidad = entrada.nextInt();
+        while (opcionEspecialidad < 1 || opcionEspecialidad > especialidades.length) {
+            System.out.println("Opción no válida. Por favor seleccione una especialidad válida.");
+            opcionEspecialidad = entrada.nextInt();
+        }
+        entrenador.setEspecialidad(especialidades[opcionEspecialidad - 1]);
+
         return entrenador;
     }
 
+    /*
     //modificar entrenador
     public Entrenador modificarEntrenador(){
         Entrenador entrenador = new Entrenador();
@@ -89,4 +100,6 @@ public class GestionGenericaGimnasio<T>  {
         System.out.println("ingrese el nuevo documento");
         entrenador.setDocumento(entrada.nextLine());
     }
+
+     */
 }

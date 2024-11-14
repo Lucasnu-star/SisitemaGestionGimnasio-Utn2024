@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.eEspecialidad;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -11,7 +13,7 @@ import java.util.*;
 public final class Entrenador extends Empleado {
 
     //Atributos
-    private Especialidad especialidad;
+    private eEspecialidad especialidad;
     private HashSet<String> certificados;
     private List<Miembro> miembrosAsignados;
 
@@ -19,7 +21,7 @@ public final class Entrenador extends Empleado {
     public Entrenador(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario, Especialidad especialidad) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
         this.certificados = new HashSet<>(); // Ver
-        this.especialidad = especialidad;
+        this.especialidad = especialidad.getEspecialidad();
         this.miembrosAsignados = new ArrayList<>();
     }
     public Entrenador() {
@@ -47,7 +49,7 @@ public final class Entrenador extends Empleado {
         this.miembrosAsignados = miembrosAsignados;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
+    public void setEspecialidad(eEspecialidad especialidad) {
         this.especialidad = especialidad;
     }
 

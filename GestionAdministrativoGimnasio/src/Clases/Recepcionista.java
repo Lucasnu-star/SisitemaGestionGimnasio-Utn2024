@@ -5,6 +5,7 @@ import Interfaces.iReportarMaquina;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -43,7 +44,7 @@ public final class Recepcionista extends Empleado {
     }
 
     //Metodos
-    public <T> void agregarDeLista(GestionGenericaGimnasio<T> lista, String clave, T obj){
+    public static  <T> void agregarDeLista(GestionGenericaGimnasio<T> lista, String clave, T obj){
         lista.agregar(clave, obj);
 
     }
@@ -53,9 +54,9 @@ public final class Recepcionista extends Empleado {
     }
 
     // Metodo para consultar un miembro por clave
-    public <T> void consultar(GestionGenericaGimnasio<T> listaMiembro, String key) {
-        T miembro =  listaMiembro.consultar(key);
-        System.out.println("Miembro: " + miembro);
+    public static  <T> T consultar(GestionGenericaGimnasio<T> lista, String key) {
+        T t=  lista.consultar(key);
+        return t;
     }
 
     // Metodo para calcular salario por entrenador:cada 5 miembros asignados se le suma un porcentaje
@@ -94,5 +95,16 @@ public final class Recepcionista extends Empleado {
             System.out.println("Máquina no encontrada.");
         }
     }
+
+    public static <T> void mostrarElementosLista(GestionGenericaGimnasio<T> gestionEntrenadores) {
+        System.out.println("Lista de elementos en GestionGym:");
+        for (Map.Entry<String, T> rec : gestionEntrenadores.getGestionUsuario().entrySet()) {
+            String clave = rec.getKey();  // Obtiene la clave del mapa
+            T valor = rec.getValue();     // Obtiene el valor del mapa
+            System.out.println("Clave: " + clave + ", Valor: " + valor);
+        }
+    }
+
+
 
 }
