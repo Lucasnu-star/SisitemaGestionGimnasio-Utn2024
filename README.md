@@ -14,7 +14,7 @@
   <li><strong>💻 [Lautaro Peñaflor]</strong> </li>
    <li><strong>💻 [Muro Justo]</strong> </li>
 </ul>
-<p align="center"><em>¡Un equipo de fuerza y código imparable! 💥</em></p>
+
 <h2>👥 Profesores 🧑‍💻</h2>
 <li><strong>💻 [Carolina Archuby]</strong> </li>
   <li><strong>📊 [Patricio Tubio (Pato)]</strong> </li>
