@@ -6,6 +6,7 @@ import Interfaces.iReportarMaquina;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  *Clase Recepcionista, esta clase...
@@ -17,6 +18,8 @@ public final class Recepcionista extends Empleado {
 
     public Recepcionista(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
+    }
+    public Recepcionista() {
     }
 
     //ToString
@@ -91,4 +94,5 @@ public final class Recepcionista extends Empleado {
             System.out.println("Máquina no encontrada.");
         }
     }
+
 }

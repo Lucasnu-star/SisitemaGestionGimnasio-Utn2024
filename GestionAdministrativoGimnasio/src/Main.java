@@ -4,23 +4,23 @@ import Enums.eTIPOMEMBRESIA;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
 
         //Creacion instancia Gimnasio
-        Gimnasio GimnasioUTN = new Gimnasio("GimnasioUTN" , 50 , "Av. Dorrego 281");
+        Gimnasio GimnasioUTN = new Gimnasio("GimnasioUTN", 50, "Av. Dorrego 281");
         //Creacion instancias Recepcionistas
-        Recepcionista recepcionista1 = new Recepcionista("Carlos", "Pérez", "12345678", LocalDate.of(1990 , 5 , 15) , 5700 , "08:00 a 12:00" );
-        Recepcionista recepcionista2 = new Recepcionista("Ana", "González", "87654321", LocalDate.of(1985, 12 , 5) , 4500 , "12:00 a 16:00");
-        Recepcionista recepcionista3 = new Recepcionista("Luis", "Martínez", "11223344", LocalDate.of(2000, 7 , 22) , 3900 , "16:00 a 20:00");
+        Recepcionista recepcionista1 = new Recepcionista("Carlos", "Pérez", "12345678", LocalDate.of(1990, 5, 15), 5700, "08:00 a 12:00");
+        Recepcionista recepcionista2 = new Recepcionista("Ana", "González", "87654321", LocalDate.of(1985, 12, 5), 4500, "12:00 a 16:00");
+        Recepcionista recepcionista3 = new Recepcionista("Luis", "Martínez", "11223344", LocalDate.of(2000, 7, 22), 3900, "16:00 a 20:00");
 
         //Creacion instancias Especialidades
         Especialidad especialidadFuncional = new Especialidad("Entrenamiento funcional", eEspecialidad.funcional);
         Especialidad especialidadMusculacion = new Especialidad("Entrenamiento de musculación", eEspecialidad.musculacion);
-        Especialidad especialidadBoxeo = new Especialidad("Entrenamiento de boxeo" , eEspecialidad.boxeo);
+        Especialidad especialidadBoxeo = new Especialidad("Entrenamiento de boxeo", eEspecialidad.boxeo);
 
         //Creacion instancias Tipos de membresia
         Membresia membresiaBasica = new Membresia("Membresía básica con acceso limitado", eTIPOMEMBRESIA.membresiaBasica, 1500);
@@ -49,15 +49,13 @@ public class Main {
         PersonalMantenimiento mantenimiento2 = new PersonalMantenimiento("Laura", "Martínez", "223344556", LocalDate.of(1985, 7, 22), 2700, "10:00 - 18:00");
 
 
-
-
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador1.getDocumento() , entrenador1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores() , entrenador2.getDocumento() , entrenador2);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador1.getDocumento(), entrenador1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionEntrenadores(), entrenador2.getDocumento(), entrenador2);
         System.out.println("++++");
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro1.getDocumento() , miembro1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro2.getDocumento() , miembro2);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento1.getDocumento() , mantenimiento1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento2.getDocumento() , mantenimiento2);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro1.getDocumento(), miembro1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro2.getDocumento(), miembro2);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento1.getDocumento(), mantenimiento1);
+        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento2.getDocumento(), mantenimiento2);
 
         //se exportan todos los datos en distintos archivos
         JSONArchivos.exportarDatosGimnasio(GimnasioUTN);
@@ -84,12 +82,11 @@ public class Main {
         System.out.println("Miembros en el gimnasio:");
         for (Miembro miembro : gimnasio.getGestionMiembros().getGestionUsuario().values()) {
             System.out.println("Nombre: " + miembro.getNombre() +
-                    ", Membresía: " + miembro.getMembresia().getTipomembresia());
+                    ", Membresía: " + miembro.getMembresia().getTipomembresia()+ "fecha" + miembro.getFechaNacimiento()+ "apeliido"+miembro.getApellido() + "documento"+miembro.getDocumento());
         }
 
+        Scanner scanner = new Scanner(System.in);
 
     }
 
 
-
-    }

@@ -1,9 +1,7 @@
 package Clases;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Clase GestionGimnasio, esta clase...
@@ -67,5 +65,28 @@ public class GestionGenericaGimnasio<T>  {
     // consultar por clave
     public T consultar (String clave){
         return gestionUsuario.get(clave);
+    }
+
+    // crea entrenador
+    public Entrenador crearEntrenador(){
+        Entrenador entrenador = new Entrenador();
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("ingrese el nombre del entrenador");
+        entrenador.setNombre(entrada.nextLine());
+        System.out.println("ingrese apellido del entrenador");
+        entrenador.setApellido(entrada.nextLine());
+        System.out.println("ingrese documento del entrenador");
+        entrenador.setDocumento(entrada.nextLine());
+        System.out.println("ingrese fecha de nacimiento");
+        entrenador.setFechaNacimiento(LocalDate.parse(entrada.nextLine()));
+        return entrenador;
+    }
+
+    //modificar entrenador
+    public Entrenador modificarEntrenador(){
+        Entrenador entrenador = new Entrenador();
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("ingrese el nuevo documento");
+        entrenador.setDocumento(entrada.nextLine());
     }
 }

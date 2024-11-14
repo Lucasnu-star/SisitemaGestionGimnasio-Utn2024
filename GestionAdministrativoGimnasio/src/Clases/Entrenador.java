@@ -22,6 +22,9 @@ public final class Entrenador extends Empleado {
         this.especialidad = especialidad;
         this.miembrosAsignados = new ArrayList<>();
     }
+    public Entrenador() {
+
+    }
 
 
     //Getters

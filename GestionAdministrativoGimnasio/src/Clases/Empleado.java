@@ -18,6 +18,9 @@ public abstract class Empleado  extends Usuario{
         this.salario = salario;
         this.horario = horario;
     }
+    public Empleado() {
+    }
+
 
     //Getters
     public int getSalario() {

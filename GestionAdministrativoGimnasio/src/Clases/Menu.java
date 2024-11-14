@@ -2,13 +2,12 @@ package Clases;
 import java.util.Scanner;
 public class Menu{
 
-    public Menu() {
+    public Menu()
+    {
+
     }
 
-    private static void MenuPrincipal(){
-
-
-
+    public static void MenuPrincipal(){
     Scanner scanner = new Scanner(System.in);
     int opcion;
 
@@ -59,10 +58,12 @@ public class Menu{
     } while(opcion !=0); // Se cierra el programa cuando se ingrese 0
 }
 
+
     // Submenú de entrenadores
-    private static void mostrarMenuEntrenadores(Scanner scanner) {
+    public static void mostrarMenuEntrenadores(Scanner scanner) {
         int opcion;
         do {
+            GestionGenericaGimnasio<Entrenador>recepcionista = new GestionGenericaGimnasio<>();
             System.out.println("\nMenú entrenadores:");
             System.out.println("1. Mostrar entrenadores");
             System.out.println("2. Consultar entrenador");
@@ -77,21 +78,30 @@ public class Menu{
             switch (opcion) {
                 case 1:
                     System.out.println("Mostrar entrenadores...");
+                    recepcionista.mostrarTodos();
                     break;
                 case 2:
                     System.out.println("Consultar entrenador...");
+                    System.out.println("ingrese DNI del entrenador a buscar...");
+                    String dni = scanner.nextLine();
+                    recepcionista.consultar(dni);
                     break;
                 case 3:
                     System.out.println("Agregar entrenador...");
+                    recepcionista.agregar(recepcionista.crearEntrenador().getDocumento(),recepcionista.crearEntrenador());
                     break;
                 case 4:
                     System.out.println("Modificar entrenador...");
+                    recepcionista.modificarEntrenador();
                     break;
                 case 5:
                     System.out.println("Eliminar entrenador...");
+                    System.out.println("ingrese documento del entrenador a eliminar");
+                    recepcionista.eliminar(scanner.nextLine());
                     break;
                 case 6:
                     System.out.println("Guardar en archivo...");
+                    JSONArchivos.importarEntrenadoresDesdeJson();
                     break;
                 case 0:
                     System.out.println("Volviendo al Menú Principal...");
@@ -103,7 +113,7 @@ public class Menu{
     }
 
     // Submenú de miembros
-    private static void mostrarMenuMiembros(Scanner scanner) {
+    public static void mostrarMenuMiembros(Scanner scanner) {
         int opcion;
         do {
             System.out.println("\nMenú miembros:");
@@ -146,7 +156,7 @@ public class Menu{
     }
 
     // Submenú de máquinas
-    private static void mostrarMenuMaquinas(Scanner scanner) {
+    public static void mostrarMenuMaquinas(Scanner scanner) {
         int opcion;
         do {
             System.out.println("\nMenú máquinas:");
@@ -189,7 +199,7 @@ public class Menu{
     }
 
     // Submenú de recepcionistas
-    private static void mostrarMenuRecepcionistas(Scanner scanner) {
+    public static void mostrarMenuRecepcionistas(Scanner scanner) {
         int opcion;
         do {
             System.out.println("\nMenú recepcionistas:");
@@ -232,7 +242,7 @@ public class Menu{
     }
 
     //Submenu mantenimiento
-    private static void mostrarMenuMantenimiento(Scanner scanner) {
+    public static void mostrarMenuMantenimiento(Scanner scanner) {
         int opcion;
         do {
             System.out.println("\nMenú Personal de mantenimiento:");
