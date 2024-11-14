@@ -68,7 +68,7 @@ public final class Especialidad {
             }
         }
     }
-
+    /*
     // Mostrar miembros por especialidad
     public void mostrarMiembrosPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
         System.out.println("Miembros interesados en la especialidad: " + tipo);
@@ -80,6 +80,8 @@ public final class Especialidad {
             }
         }
     }
+
+     */
     // Método para convertir un JSONObject en una instancia de Especialidad
     public static Especialidad fromJSONObject(JSONObject jsonObject) {
         String nombre = jsonObject.getString("nombre");
@@ -88,5 +90,7 @@ public final class Especialidad {
 
         return new Especialidad(nombre, especialidad);
     }
+
+
 }
 

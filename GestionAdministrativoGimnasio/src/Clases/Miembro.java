@@ -12,15 +12,13 @@ public final class Miembro extends Usuario{
 
     //Atributos
     private Membresia membresia;
-    private Entrenador entrenadorAsingado;
     private boolean estadoMembresia; // True o False
     private LocalDate fechaIncripcion;
 
     //Constructor
-    public Miembro(String nombre, String apellido, String documento, LocalDate fechaNacimiento, Membresia membresia, Entrenador entrenadorAsingado, boolean estadoMembresia, LocalDate fechaIncripcion) {
+    public Miembro(String nombre, String apellido, String documento, LocalDate fechaNacimiento, Membresia membresia, boolean estadoMembresia, LocalDate fechaIncripcion) {
         super(nombre, apellido, documento, fechaNacimiento);
         this.membresia = membresia;
-        this.entrenadorAsingado = entrenadorAsingado;
         this.estadoMembresia = estadoMembresia;
         this.fechaIncripcion = fechaIncripcion;
     }
@@ -29,10 +27,6 @@ public final class Miembro extends Usuario{
 
     public Membresia getMembresia() {
         return membresia;
-    }
-
-    public Entrenador getEntrenadorAsingado() {
-        return entrenadorAsingado;
     }
 
     public boolean isEstadoMembresia() {
@@ -49,10 +43,6 @@ public final class Miembro extends Usuario{
         this.membresia = membresia;
     }
 
-    public void setEntrenadorAsingado(Entrenador entrenadorAsingado) {
-        this.entrenadorAsingado = entrenadorAsingado;
-    }
-
     public void setEstadoMembresia(boolean estadoMembresia) {
         this.estadoMembresia = estadoMembresia;
     }
@@ -63,28 +53,28 @@ public final class Miembro extends Usuario{
 
     //Equals && HashCode
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Miembro miembro = (Miembro) o;
-        return estadoMembresia == miembro.estadoMembresia && Objects.equals(membresia, miembro.membresia) && Objects.equals(entrenadorAsingado, miembro.entrenadorAsingado) && Objects.equals(fechaIncripcion, miembro.fechaIncripcion);
+        return estadoMembresia == miembro.estadoMembresia && Objects.equals(membresia, miembro.membresia) && Objects.equals(fechaIncripcion, miembro.fechaIncripcion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), membresia, entrenadorAsingado, estadoMembresia, fechaIncripcion);
+        return Objects.hash(super.hashCode(), membresia, estadoMembresia, fechaIncripcion);
     }
 
-    //ToString
     @Override
     public String toString() {
-        return super.toString()+
-                " Miembro " +
-                "membresia=" + membresia +
-                ", entrenadorAsingado=" + entrenadorAsingado +
-                ", estadoMembresia=" + estadoMembresia +
-                ", fechaIncripcion=" + fechaIncripcion ;
+        final StringBuilder sb = new StringBuilder("Miembro{");
+        sb.append("membresia=").append(membresia);
+        sb.append(", estadoMembresia=").append(estadoMembresia);
+        sb.append(", fechaIncripcion=").append(fechaIncripcion);
+        sb.append('}');
+        return sb.toString();
     }
 }

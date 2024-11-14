@@ -22,6 +22,9 @@ public final class Membresia {
         this.costoMensual = constoMensual;
     }
 
+    public Membresia() {
+    }
+
     //Getters
 
     public String getDescripcion() {
@@ -44,6 +47,10 @@ public final class Membresia {
 
     public void setTipomembresia(eTIPOMEMBRESIA eTipomembresia) {
         this.eTipomembresia = eTipomembresia;
+    }
+
+    public void setCostoMensual(long costoMensual) {
+        this.costoMensual = costoMensual;
     }
 
     //Equals && HashCode
