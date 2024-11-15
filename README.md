@@ -27,12 +27,13 @@
   <li>📝 Gestión de clases y especialidades</li>
   <li>🏋️‍♂️ Administración de roles administrativos</li>
    <li>📈 Persistencia de datos</li>
+   <li>💄 Mejoras en la interfaz administrativo para una buena experiencia</li>
   
 </ul>
 <h2>🎯 Próximos Pasos 🎯</h2>
 <ul>
  
-  <li>💄 Mejoras en la interfaz administrativo para una buena experiencia</li>
+  
 </ul>
 <p align="center">
   <em>Este README se actualizará conforme agreguemos nuevas "repeticiones" en nuestro desarrollo</em> 💪💻.
