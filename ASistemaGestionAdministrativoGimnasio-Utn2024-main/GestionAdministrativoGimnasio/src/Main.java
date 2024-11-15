@@ -131,7 +131,26 @@ Main {
         GimnasioUTN.getGestionMaquinas().agregar(maquina9.getNombre(), maquina9);
         GimnasioUTN.getGestionMaquinas().agregar(maquina10.getNombre(), maquina10);
 
+        String nombre = "Admin1";
+        String pass = "123";
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingresa el nombre de usuario: ");
+        String usuario = input.nextLine();
+        System.out.println("Ingresa la contrasena: ");
+        String contrasena = input.nextLine();
+
+        while (!nombre.equals(usuario) || !contrasena.equals(pass)) {
+            System.out.println("Credenciales incorrectas");
+            System.out.println("Ingresa el nombre de usuario: ");
+            usuario = input.nextLine();
+            System.out.println("Ingresa la contrasena: ");
+            contrasena = input.nextLine();
+
+        }
         Menu.MenuPrincipal(GimnasioUTN);
+
+        System.out.println("Credenciales correctas");
 
 
 

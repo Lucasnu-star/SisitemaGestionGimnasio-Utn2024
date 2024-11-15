@@ -1,6 +1,8 @@
 package Clases;
 import org.json.JSONArray;
+import org.json.JSONException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Menu {
 
@@ -80,13 +82,23 @@ public class Menu {
                      System.out.println("Consultar miembro...");
                      Scanner tecladoMiembro = new Scanner(System.in);
                      System.out.println("Ingrese DNI del miembro a buscar...");
-                     String dni = tecladoMiembro.nextLine();
-                     Miembro miembroConsultado = recepcionista.consultar(gym.getGestionMiembros(), dni);
-                     if (miembroConsultado != null) {
-                         System.out.println(miembroConsultado);
-                     } else {
-                         System.out.println("Miembro no encontrado.");
+                     try
+                     {
+                         String dni = tecladoMiembro.nextLine();
+                         Miembro miembroConsultado = recepcionista.consultar(gym.getGestionMiembros(), dni);
+                         if (miembroConsultado != null) {
+                             System.out.println(miembroConsultado);
+                         } else {
+                             System.out.println("Miembro no encontrado.");
+                         }
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e)
+                     {
+                         e.printStackTrace();
                      }
+
                      break;
                  case 3:
                      System.out.println("Agregar miembro...");
@@ -97,18 +109,42 @@ public class Menu {
                  case 4:
                      System.out.println("Modificar miembro...");
                      Scanner scan = new Scanner(System.in);
-                     System.out.println("Ingrese el DNI del miembro a modificar:");
-                     String documento = scan.nextLine();
-                     Recepcionista.modificarMiembro(documento, gym.getGestionMiembros());
-                     JSONArchivos.exportarMiembrosAJson(gym);
+                     try{
+                         System.out.println("Ingrese el DNI del miembro a modificar:");
+                         String documento = scan.nextLine();
+                         Recepcionista.modificarMiembro(documento, gym.getGestionMiembros());
+                         JSONArchivos.exportarMiembrosAJson(gym);
+                     }catch (InputMismatchException e )
+                     {
+                         e.printStackTrace();
+                     }catch (JSONException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e)
+                     {
+                         e.printStackTrace();
+                     }
+
                      break;
                  case 5:
                      System.out.println("Eliminar miembro...");
                      Scanner scanEliminar = new Scanner(System.in);
                      System.out.println("Ingrese DNI del miembro a eliminar:");
-                     String dniEliminar = scanEliminar.nextLine();
-                     recepcionista.eliminarDeLista(gym.getGestionMiembros(), dniEliminar);
-                     JSONArchivos.eliminarMiembroPorDni(dniEliminar, "Miembros.json");
+                     try{
+                         String dniEliminar = scanEliminar.nextLine();
+                         recepcionista.eliminarDeLista(gym.getGestionMiembros(), dniEliminar);
+                         JSONArchivos.eliminarMiembroPorDni(dniEliminar, "Miembros.json");
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }catch (JSONException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e)
+                     {
+                         e.printStackTrace();
+                     }
+
                      break;
                  case 6:
                      System.out.println("Ver archivo de miembros...");
@@ -125,8 +161,14 @@ public class Menu {
                      System.out.println("Verificando membresia...");
                      Recepcionista.mostrarElementosLista(gym.getGestionMiembros());
                      System.out.println("Ingrese el dni del usuario a verificar la membresia");
-                     String dnii = scanner.nextLine();
-                     recepcionista.verificarMembresia(gym,dnii);
+                     try {
+                         String dnii = scanner.nextLine();
+                         recepcionista.verificarMembresia(gym,dnii);
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }
+
                  case 0:
                      System.out.println("Volviendo al Menú Principal...");
                      break;
@@ -167,10 +209,17 @@ public class Menu {
                      JSONArchivos.importarMaquinasDesdeJson(gym.getGestionMaquinas());
                      System.out.println("Consultar máquina...");
                      System.out.println("ingrese el nombre de la maquina a buscar...");
-                     String id = tecladoMaquina.nextLine();
-                     Maquina maq=Recepcionista.consultar(gym.getGestionMaquinas(),id);
-                     System.out.println(maq.toString());
-                     JSONArchivos.exportarMaquinasAJson(gym);
+                     try    {
+                         String id = tecladoMaquina.nextLine();
+                         Maquina maq=Recepcionista.consultar(gym.getGestionMaquinas(),id);
+                         System.out.println(maq.toString());
+                         JSONArchivos.exportarMaquinasAJson(gym);
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e){
+                         e.printStackTrace();
+                     }
                      break;
                  case 3:
                      JSONArchivos.importarMaquinasDesdeJson(gym.getGestionMaquinas());
@@ -183,18 +232,39 @@ public class Menu {
                      JSONArchivos.importarMaquinasDesdeJson(gym.getGestionMaquinas());
                      System.out.println("Modificar máquina...");
                      System.out.println("ingrese id a modificar...");
-                     String idM = tecladoMaquina.nextLine();
-                     Recepcionista.modificarMaquina(idM,gym.getGestionMaquinas());
-                     JSONArchivos.exportarMaquinasAJson(gym);
-
+                     try
+                     {
+                         String idM = tecladoMaquina.nextLine();
+                         Recepcionista.modificarMaquina(idM,gym.getGestionMaquinas());
+                         JSONArchivos.exportarMaquinasAJson(gym);
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }catch (JSONException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e)
+                     {
+                         e.printStackTrace();
+                     }
                      break;
+
                  case 5:
                      JSONArchivos.importarMaquinasDesdeJson(gym.getGestionMaquinas());
                      System.out.println("Eliminar máquina...");
                      System.out.println("ingrese id a eliminar...");
-                     String idma=tecladoMaquina.nextLine();
-                     Recepcionista.eliminarDeLista(gym.getGestionMaquinas(),idma);
-                     JSONArchivos.exportarListaMaquinas(gym);
+                     try{
+                         String idma=tecladoMaquina.nextLine();
+                         Recepcionista.eliminarDeLista(gym.getGestionMaquinas(),idma);
+                         JSONArchivos.exportarListaMaquinas(gym);
+                     }catch (InputMismatchException e)
+                     {
+                         e.printStackTrace();
+                     }catch (Exception e)
+                     {
+                         e.printStackTrace();
+                     }
+
                      break;
                  case 6:
                      System.out.println("Guardar en archivo...");
@@ -236,9 +306,16 @@ public class Menu {
                     Scanner tecladoMantenimiento = new Scanner(System.in);
                     System.out.println("Consultar personal de mantenimiento...");
                     System.out.println("ingrese DNI del personal de mantenimiento a buscar...");
-                    String dni = tecladoMantenimiento.nextLine();
-                    PersonalMantenimiento mantenimientoConsultado = Recepcionista.consultar(gym.getGestionPersonalMantenimiento(), dni);
-                    System.out.println(mantenimientoConsultado);
+                    try {
+                        String dni = tecladoMantenimiento.nextLine();
+                        PersonalMantenimiento mantenimientoConsultado = Recepcionista.consultar(gym.getGestionPersonalMantenimiento(), dni);
+                        System.out.println(mantenimientoConsultado);
+                    } catch (InputMismatchException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     break;
                 case 3:
                     System.out.println("Agregar personal de mantenimiento...");
@@ -248,24 +325,44 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Modificar personal de mantenimiento...");
-                    Scanner scaner = new Scanner(System.in);
                     System.out.println("ingrese el dni del Personal de mantenimiento a cambiar");
-                    String documento = scaner.nextLine();
-                    Recepcionista.modificarPersonaldeMantenimiento(documento,gym.getGestionPersonalMantenimiento());
-                    JSONArchivos.exportarPersonalMantenimientoAJson(gym);
+                    try {
+                        String documento = scanner.nextLine();
+                        Recepcionista.modificarPersonaldeMantenimiento(documento, gym.getGestionPersonalMantenimiento());
+                        JSONArchivos.exportarPersonalMantenimientoAJson(gym);
+                    } catch (InputMismatchException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     break;
                 case 5:
                     System.out.println("Eliminar personal de mantenimiento...");
                     System.out.println("Ingrese documento del personal de mantenimiento a eliminar");
-                    Scanner scanerr = new Scanner(System.in);
-                    String dnii =scanerr.nextLine();
-                    Recepcionista.eliminarDeLista(gym.getGestionPersonalMantenimiento(),dnii);
-                    JSONArchivos.eliminarPersonalPorDni(dnii, "PersonalMantenimiento.json");
+                    try {
+                        String dnii = scanner.nextLine();
+                        Recepcionista.eliminarDeLista(gym.getGestionPersonalMantenimiento(), dnii);
+                        JSONArchivos.eliminarPersonalPorDni(dnii, "PersonalMantenimiento.json");
+                    } catch (InputMismatchException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 6:
                     System.out.println("Guardar en archivo...");
-                    JSONArchivos.exportarPersonalMantenimientoAJson(gym);
-                    JSONArchivos.exportarListaPersonalMantenimiento(gym);
+                    try {
+                        JSONArchivos.exportarPersonalMantenimientoAJson(gym);
+                        JSONArchivos.exportarListaPersonalMantenimiento(gym);
+                    }catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
                     break;
                 case 0:
                     System.out.println("Volviendo al Menú Principal...");
@@ -278,7 +375,7 @@ public class Menu {
 
         // Submenú de entrenadores
         public static void mostrarMenuEntrenadores(Gimnasio gym) {
-            Scanner teclado = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
             Recepcionista recepcionista1 = new Recepcionista();
             int opcion;
             GestionGenericaGimnasio<Entrenador> recepcionista = new GestionGenericaGimnasio<>();
@@ -296,7 +393,7 @@ public class Menu {
                 System.out.println("9. Guardar en archivo");
                 System.out.println("0. Volver al Menú Principal");
                 System.out.print("Ingrese una opción: ");
-                opcion = teclado.nextInt();
+                opcion = scanner.nextInt();
 
                 switch (opcion) {
                     case 1:
@@ -307,37 +404,66 @@ public class Menu {
                         Scanner tecladoEntrenador = new Scanner(System.in);
                         System.out.println("Consultar entrenador...");
                         System.out.println("ingrese DNI del entrenador a buscar...");
-                        String dni = tecladoEntrenador.nextLine();
-                        Entrenador entrenadorConsultado = Recepcionista.consultar(gym.getGestionEntrenadores(), dni);
-                        System.out.println(entrenadorConsultado);
+                        try {
+                            String dni = tecladoEntrenador.nextLine();
+                            Entrenador entrenadorConsultado = Recepcionista.consultar(gym.getGestionEntrenadores(), dni);
+                            System.out.println(entrenadorConsultado);
+                        }catch (InputMismatchException e)
+                        {
+                            e.printStackTrace();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
                         break;
+
                     case 3:
                         System.out.println("Agregar entrenador...");
                         Entrenador entrenador = recepcionista.crearEntrenador();
                         Recepcionista.agregarDeLista(gym.getGestionEntrenadores(), entrenador.getDocumento(), entrenador);
                         JSONArchivos.exportarEntrenadorAJson(entrenador);
-
                         break;
+
                     case 4:
                         System.out.println("Modificar entrenador...");
-                        Scanner scaner = new Scanner(System.in);
                         System.out.println("ingrese el dni del entrenador a cambiar");
-                        String documento = scaner.nextLine();
-                        Recepcionista.modificarEntrenador(documento,gym.getGestionEntrenadores());
-                        JSONArchivos.exportarEntrenadoresAJson(gym);
+                        try {
+                            String documento = scanner.nextLine();
+                            Recepcionista.modificarEntrenador(documento,gym.getGestionEntrenadores());
+                            JSONArchivos.exportarEntrenadoresAJson(gym);
+                        }catch (InputMismatchException e)
+                        {
+                            e.printStackTrace();
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
 
                         break;
                     case 5:
                         System.out.println("Eliminar entrenador...");
                         System.out.println("Ingrese documento del entrenador a eliminar");
-                        Scanner scanerr = new Scanner(System.in);
-                        String dnii =scanerr.nextLine();
-                        Recepcionista.eliminarDeLista(gym.getGestionEntrenadores(),dnii);
-                        JSONArchivos.eliminarEntrenadorPorDni(dnii, "Entrenadores.json");
+                        try {
+                            String dnii =scanner.nextLine();
+                            Recepcionista.eliminarDeLista(gym.getGestionEntrenadores(),dnii);
+                            JSONArchivos.eliminarEntrenadorPorDni(dnii, "Entrenadores.json");
+                        }catch (InputMismatchException e)
+                        {
+                            e.printStackTrace();
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
                         break;
 
                     case 6:
-                        Scanner entrada = new Scanner(System.in);
                         System.out.println("Asignando miembro...");
 
                         // Mostrar entrenadores existentes
@@ -345,7 +471,7 @@ public class Menu {
 
                         // Solicitar documento del entrenador
                         System.out.println("Ingrese el documento del entrenador al que desea asignar un miembro:");
-                        String documento2 = entrada.nextLine();
+                        String documento2 = scanner.nextLine();
 
                         // Consultar el entrenador existente en la lista
                         Entrenador entrenadorExistente = gym.getGestionEntrenadores().consultar(documento2);
@@ -358,11 +484,15 @@ public class Menu {
                         } else {
                             System.out.println("No se encontró un entrenador con el documento proporcionado.");
                         }
-                        JSONArchivos.exportarListaEntrenadores(gym);
+                        try {
+                            JSONArchivos.exportarListaEntrenadores(gym);
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
                         break;
 
                     case 7:
-                        Scanner entradaa = new Scanner(System.in);
                         System.out.println("Mostrar miembros asignados a un entrenador...");
 
                         // Mostrar entrenadores disponibles
@@ -370,28 +500,49 @@ public class Menu {
 
                         // Solicitar el documento del entrenador
                         System.out.println("Ingrese el documento del entrenador para ver sus miembros asignados:");
-                        String documentoEntrenador = entradaa.nextLine();
+                        try {
+                            String documentoEntrenador = scanner.nextLine();
+                            // Buscar al entrenador
+                            Entrenador entrenadorParaConsultar = gym.getGestionEntrenadores().consultar(documentoEntrenador);
 
-                        // Buscar al entrenador
-                        Entrenador entrenadorParaConsultar = gym.getGestionEntrenadores().consultar(documentoEntrenador);
-
-                        if (entrenadorParaConsultar != null) {
-                            // Llamar al método para consultar y mostrar los miembros asignados
-                            entrenadorParaConsultar.consultarMiembros();
-                        } else {
-                            System.out.println("No se encontró un entrenador con el documento proporcionado.");
+                            if (entrenadorParaConsultar != null) {
+                                // Llamar al método para consultar y mostrar los miembros asignados
+                                entrenadorParaConsultar.consultarMiembros();
+                            } else {
+                                System.out.println("No se encontró un entrenador con el documento proporcionado.");
+                            }
+                        }catch (InputMismatchException e)
+                        {
+                            e.printStackTrace();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
                         }
+
                         break;
                     case 8:
                         Scanner tecla = new Scanner(System.in);
                         System.out.println("Calculando salario..");
                         System.out.println("Ingrese dni ");
-                        Recepcionista.calcularSalario(gym.getGestionEntrenadores(), tecla.nextLine() );
+                        try {
+                            Recepcionista.calcularSalario(gym.getGestionEntrenadores(), tecla.nextLine() );
+                        }catch (InputMismatchException e)
+                        {
+                            e.printStackTrace();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
                         break;
                     case 9:
                         System.out.println("Guardando en archivo...");
-                        JSONArchivos.exportarEntrenadoresAJson(gym);
-                        JSONArchivos.exportarListaEntrenadores(gym);
+                        try{
+                            JSONArchivos.exportarEntrenadoresAJson(gym);
+                            JSONArchivos.exportarListaEntrenadores(gym);
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
                         break;
                     case 0:
                         System.out.println("Volviendo al Menú Principal...");
