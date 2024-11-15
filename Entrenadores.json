@@ -1,18 +1,1 @@
-[
-    {
-        "apellido": "nunez",
-        "salario": 0,
-        "documento": "12345",
-        "miembrosAsignados": [],
-        "nombre": "lucas",
-        "especialidad": "CARDIO"
-    },
-    {
-        "apellido": "nunez",
-        "salario": 0,
-        "documento": "12345",
-        "miembrosAsignados": [],
-        "nombre": "lucas",
-        "especialidad": "CARDIO"
-    }
-]
+[{"apellido":"peñaflor","salario":0,"documento":"43243243","miembrosAsignados":[],"nombre":"lauty","especialidad":"BOXEO"}]

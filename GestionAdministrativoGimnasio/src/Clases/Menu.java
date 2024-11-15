@@ -1,4 +1,6 @@
 package Clases;
+import org.json.JSONArray;
+
 import java.util.Scanner;
 public class Menu {
 
@@ -175,7 +177,6 @@ public class Menu {
                      break;
                  case 6:
                      System.out.println("Ver lista de miembros...");
-                     JSONArchivos.importarMiembrosDesdeJson(gym);
 
                      break;
 
@@ -325,6 +326,9 @@ public class Menu {
     public static void MenuPrincipal(Gimnasio gym) {
         Scanner scanner = new Scanner(System.in);
         int opcion;
+        JSONArchivos.importarEntrenadoresDesdeJson(gym);
+        JSONArchivos.importarMiembrosDesdeJson(gym);
+
 
         do {
 
@@ -376,6 +380,7 @@ public class Menu {
             Recepcionista recepcionista1 = new Recepcionista();
             int opcion;
             GestionGenericaGimnasio<Entrenador> recepcionista = new GestionGenericaGimnasio<>();
+
             do {
                 System.out.println("\nMenú entrenadores:");
                 System.out.println("1. Mostrar entrenadores");
@@ -383,10 +388,9 @@ public class Menu {
                 System.out.println("3. Agregar entrenador");
                 System.out.println("4. Modificar entrenador");
                 System.out.println("5. Eliminar entrenador");
-                System.out.println("6. Ver lista");
-                System.out.println("7. Asignar miembro a entrenador");
-                System.out.println("8. Cantidad de miembros x entrenador");
-                System.out.println("9. Calcular salario");
+                System.out.println("6. Asignar miembro a entrenador");
+                System.out.println("7. Cantidad de miembros x entrenador");
+                System.out.println("8. Calcular salario");
                 System.out.println("0. Volver al Menú Principal");
                 System.out.print("Ingrese una opción: ");
                 opcion = teclado.nextInt();
@@ -428,13 +432,8 @@ public class Menu {
                         Recepcionista.eliminarDeLista(gym.getGestionEntrenadores(),dnii);
                         JSONArchivos.eliminarEntrenadorPorDni(dnii, "Entrenadores.json");
                         break;
+
                     case 6:
-                        System.out.println("Ver lista entrenadores");
-
-                      JSONArchivos.importarEntrenadoresDesdeJson(gym);
-
-                        break;
-                    case 7:
                         Scanner entrada = new Scanner(System.in);
                         System.out.println("Asignando miembro...");
 
@@ -456,10 +455,10 @@ public class Menu {
                         } else {
                             System.out.println("No se encontró un entrenador con el documento proporcionado.");
                         }
-                        JSONArchivos.exportarEntrenadoresAJson(gym);
+                        JSONArchivos.exportarListaEntrenadores(gym);
                         break;
 
-                    case 8:
+                    case 7:
                         Scanner entradaa = new Scanner(System.in);
                         System.out.println("Mostrar miembros asignados a un entrenador...");
 
@@ -480,7 +479,7 @@ public class Menu {
                             System.out.println("No se encontró un entrenador con el documento proporcionado.");
                         }
                         break;
-                    case 9:
+                    case 8:
                         Scanner tecla = new Scanner(System.in);
                         System.out.println("Calculando salario..");
                         System.out.println("Ingrese dni ");

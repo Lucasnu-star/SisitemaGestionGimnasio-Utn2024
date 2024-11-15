@@ -52,7 +52,6 @@ Main {
 
 
 
-        System.out.println(GimnasioUTN.getGestionEntrenadores());
 
         Menu.MenuPrincipal(GimnasioUTN);
 

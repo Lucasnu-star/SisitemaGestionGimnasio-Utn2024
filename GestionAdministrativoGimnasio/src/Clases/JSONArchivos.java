@@ -92,7 +92,17 @@ public final class JSONArchivos {
     public static JSONArray exportarMiembrosAJson(Gimnasio gimnasio) {
         JSONArray jsonArray = new JSONArray();
         for (Miembro miembro : gimnasio.getGestionMiembros().gestionUsuario.values()) {
-            JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject = miembroToJsonObject(miembro);
+            jsonArray.put(jsonObject);
+        }
+
+        return jsonArray;
+    }
+
+    public static JSONObject miembroToJsonObject(Miembro miembro){
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject();
             jsonObject.put("nombre", miembro.getNombre());
             jsonObject.put("apellido", miembro.getApellido());
             jsonObject.put("documento", miembro.getDocumento());
@@ -100,19 +110,12 @@ public final class JSONArchivos {
             jsonObject.put("fechaIncripcion", miembro.getFechaIncripcion());
             jsonObject.put("membresia", membresiaToJsonObject(miembro.getMembresia()));
             jsonObject.put("estadoMembresia", miembro.isEstadoMembresia());
-            jsonArray.put(jsonObject);
-        }
-        try (FileWriter file = new FileWriter("Miembros.json")) {
-            file.write(jsonArray.toString(4)); // Indentado para mejor legibilidad
-            System.out.println("Miembros exportados a JSON exitosamente.");
-        } catch (IOException e) {
+        }catch (JSONException e){
             e.printStackTrace();
-            System.out.println("Error al exportar miembros a JSON: " + e.getMessage());
         }
-
-
-        return jsonArray;
+        return jsonObject;
     }
+
 
     public static JSONObject membresiaToJsonObject(Membresia membresia){
         JSONObject jsonObject = null;
@@ -140,42 +143,42 @@ public final class JSONArchivos {
     }
 
     public static JSONArray exportarEntrenadoresAJson(Gimnasio gimnasio) {
-        JSONArray jsonArray = new JSONArray();
-        for (Entrenador entrenador : gimnasio.getGestionEntrenadores().gestionUsuario.values()) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("nombre", entrenador.getNombre());
-            jsonObject.put("apellido", entrenador.getApellido());
-            jsonObject.put("documento", entrenador.getDocumento());
-            jsonObject.put("salario", entrenador.getSalario());
-            jsonObject.put("especialidad", entrenador.getEspecialidad()); // Usar el nombre del enum como string
-            jsonArray.put(jsonObject);
+        JSONArray jsonArray = null;
+        try{
+            jsonArray = new JSONArray();
+            for (Entrenador entrenador : gimnasio.getGestionEntrenadores().gestionUsuario.values()) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("nombre", entrenador.getNombre());
+                jsonObject.put("apellido", entrenador.getApellido());
+                jsonObject.put("documento", entrenador.getDocumento());
+                jsonObject.put("salario", entrenador.getSalario());
+                jsonObject.put("especialidad", entrenador.getEspecialidad()); // Usar el nombre del enum como string
 
-            JSONArray miembrosAsignadosArray = new JSONArray();
-            if (entrenador.getMiembrosAsignados() != null) { // Verifica que la lista no sea nula
-                for (Miembro miembro : entrenador.getMiembrosAsignados()) {
-                    JSONObject miembroJson = new JSONObject();
-                    miembroJson.put("nombre", miembro.getNombre());
-                    miembroJson.put("apellido", miembro.getApellido());
-                    miembroJson.put("documento", miembro.getDocumento());
-                    miembroJson.put("fechaNacimiento", miembro.getFechaNacimiento().toString());
-                    miembroJson.put("estadoMembresia", miembro.isEstadoMembresia());
-                    miembroJson.put("fechaIncripcion", miembro.getFechaIncripcion().toString());
-                    miembrosAsignadosArray.put(miembroJson);
+                JSONArray miembrosAsignadosArray = new JSONArray();
+                if (entrenador.getMiembrosAsignados() != null) { // Verifica que la lista no sea nula
+                    for (Miembro miembro : entrenador.getMiembrosAsignados()) {
+                        JSONObject miembroJson = new JSONObject();
+                        miembroJson.put("nombre", miembro.getNombre());
+                        miembroJson.put("apellido", miembro.getApellido());
+                        miembroJson.put("documento", miembro.getDocumento());
+                        miembroJson.put("fechaNacimiento", miembro.getFechaNacimiento().toString());
+                        miembroJson.put("estadoMembresia", miembro.isEstadoMembresia());
+                        miembroJson.put("fechaIncripcion", miembro.getFechaIncripcion().toString());
+                        miembrosAsignadosArray.put(miembroJson);
+                    }
                 }
+                jsonObject.put("miembrosAsignados", miembrosAsignadosArray);
+                jsonArray.put(jsonObject);
             }
-            jsonObject.put("miembrosAsignados", miembrosAsignadosArray);
-            jsonArray.put(jsonObject);
+        }catch (JSONException e){
+            e.printStackTrace();
         }
 
-        try (FileWriter file = new FileWriter("Entrenadores.json")) {
-            file.write(jsonArray.toString(4)); // Indentado para mejor legibilidad
-            System.out.println("Entrenador exportados a JSON exitosamente.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al exportar entrenador a JSON: " + e.getMessage());
-        }
+
         return jsonArray;
     }
+
+
 
 
 
@@ -234,6 +237,36 @@ public final class JSONArchivos {
         JSONArchivos.EscribirArchivoArray("PersonalMantenimiento.json", jsonArray);
     }
 
+    /*
+    public static void guardarMiembrosAsignadosAJson(){
+        try {
+            // Leer el archivo JSON
+            JSONTokener tokener = leerArchivoTokener("Entrenadores.json");
+            if (tokener == null) {
+                System.out.println("El archivo no fue leído correctamente.");
+                return;
+            }
+
+            JSONArray jsonArray = new JSONArray(tokener);
+            if (jsonArray.length() == 0) {
+                System.out.println("El archivo JSON está vacío.");
+                return;
+            }
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                if ()
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al importar entrenadores: " + e.getMessage());
+        }
+    }
+
+     */
+
     public static Gimnasio importarDatosGimnasioDesdeJson(){
         Gimnasio gimnasio = new Gimnasio();
         try {
@@ -274,7 +307,6 @@ public final class JSONArchivos {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 // Imprimir el objeto actual para verificar su contenido
-                System.out.println("Miembro JSON: " + jsonObject);
 
                 String nombre = jsonObject.getString("nombre");
                 String apellido = jsonObject.getString("apellido");
@@ -296,11 +328,59 @@ public final class JSONArchivos {
         }
     }
 
+    /*
+    public static JSONArray retornarJsonArray(String nombreArchivo){
+        JSONTokener jsonTokener = JSONArchivos.leerArchivoTokener(nombreArchivo);
+        return new JSONArray(jsonTokener);
+    }
+
+    public static void asignarMiembroEntrenador(String dni){
+
+    }
+    public static GestionGenericaGimnasio<Entrenador> importarEntrenadoresDesdeJson2() {
+        GestionGenericaGimnasio<Entrenador> entrenadores = new GestionGenericaGimnasio<>();
+        try {
+            // Leer el archivo JSON
+            JSONTokener tokener = leerArchivoTokener("Entrenadores.json");
+
+            JSONArray jsonArray = new JSONArray(tokener);
+            entrenadores = jsonArrayToEntrenadores(jsonArray);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return entrenadores;
+    }
+
+
+    public static GestionGenericaGimnasio<Entrenador> jsonArrayToEntrenadores(JSONArray jsonArray){
+        GestionGenericaGimnasio<Entrenador> entrenadores = new GestionGenericaGimnasio<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+            String nombre = jsonObject.getString("nombre");
+            String apellido = jsonObject.getString("apellido");
+            String documento = jsonObject.getString("documento");
+            int salario = jsonObject.getInt("salario");
+
+            // Ajuste para deserializar la especialidad como String y convertirlo a eEspecialidad
+            eEspecialidad especialidadEnum = eEspecialidad.valueOf(jsonObject.getString("especialidad").toUpperCase());
+            Especialidad especialidad = new Especialidad("Sin descripción", especialidadEnum);
+
+            Entrenador entrenador = new Entrenador(nombre, apellido, documento, LocalDate.now(), salario, "", especialidad);
+
+            entrenadores.agregar(entrenador.getDocumento(), entrenador);
+
+
+        }
+        return entrenadores;
+    }
+
+     */
+
     public static Membresia importarMembresiaDesdeJson(JSONObject jsonObject) {
         Membresia membresia = new Membresia();
         try {
-
-
 
             if (jsonObject.has("descripcion")) {
                 membresia.setDescripcion(jsonObject.getString("descripcion"));
@@ -384,7 +464,6 @@ public final class JSONArchivos {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
              // Imprimir el objeto actual para verificar su contenido
-                System.out.println("Entrenador JSON: " + jsonObject);
 
                 String nombre = jsonObject.getString("nombre");
                 String apellido = jsonObject.getString("apellido");
