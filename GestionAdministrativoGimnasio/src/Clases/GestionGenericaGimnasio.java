@@ -34,7 +34,6 @@ public class GestionGenericaGimnasio<T>  {
     }
     public void agregar(String clave, T obj) {
         gestionUsuario.put(clave, obj);
-        System.out.println("Elemento agregado: " + obj);
     }
 
     // Metdo para eliminar un elemento

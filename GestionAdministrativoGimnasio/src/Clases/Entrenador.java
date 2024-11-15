@@ -85,8 +85,10 @@ public final class Entrenador extends Empleado {
 
     // Método para asignar un miembro al entrenador
     public void asignarMiembro(Miembro miembro) {
-        miembrosAsignados.add(miembro);
-        System.out.println("Miembro " + miembro.getNombre() + " asignado al entrenador " + getNombre());
+        if (miembrosAsignados != null) {
+            miembrosAsignados.add(miembro);
+            System.out.println("Miembro " + miembro.getNombre() + " asignado al entrenador " + getNombre());
+        }
     }
 
     // Metodo para consultar los meimbros de un entreandor
@@ -97,7 +99,7 @@ public final class Entrenador extends Empleado {
             System.out.println("Lista de miembros asignados al entrenador " + getNombre() + ":");
             for (Miembro miembro : miembrosAsignados) {
                 System.out.println("- Nombre: " + miembro.getNombre() + ", Estado Membresía: "
-                        + (miembro.isEstadoMembresia()));
+                        + miembro.isEstadoMembresia());
             }
         }
     }

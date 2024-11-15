@@ -139,11 +139,27 @@ public final class JSONArchivos {
             jsonObject.put("documento", entrenador.getDocumento());
             jsonObject.put("salario", entrenador.getSalario());
             jsonObject.put("especialidad", entrenador.getEspecialidad()); // Usar el nombre del enum como string
-            jsonObject.put("miembrosAsignados", exportarMiembrosAJson(gimnasio));
+            jsonArray.put(jsonObject);
+
+            JSONArray miembrosAsignadosArray = new JSONArray();
+            if (entrenador.getMiembrosAsignados() != null) { // Verifica que la lista no sea nula
+                for (Miembro miembro : entrenador.getMiembrosAsignados()) {
+                    JSONObject miembroJson = new JSONObject();
+                    miembroJson.put("nombre", miembro.getNombre());
+                    miembroJson.put("apellido", miembro.getApellido());
+                    miembroJson.put("documento", miembro.getDocumento());
+                    miembroJson.put("fechaNacimiento", miembro.getFechaNacimiento().toString());
+                    miembroJson.put("estadoMembresia", miembro.isEstadoMembresia());
+                    miembroJson.put("fechaIncripcion", miembro.getFechaIncripcion().toString());
+                    miembrosAsignadosArray.put(miembroJson);
+                }
+            }
+            jsonObject.put("miembrosAsignados", miembrosAsignadosArray);
             jsonArray.put(jsonObject);
         }
         return jsonArray;
     }
+
 
 
     public static  JSONObject toJsonObject(Especialidad esp)
@@ -212,6 +228,8 @@ public final class JSONArchivos {
             gimnasio.setDireccionGimnasio(jsonObject.getString("direccion"));
             gimnasio.setCapacidadGimnasio(jsonObject.getInt("capacidad"));
         }catch (JSONException e){
+            e.printStackTrace();
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 

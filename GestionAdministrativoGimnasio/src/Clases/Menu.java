@@ -395,17 +395,50 @@ public class Menu {
                         break;
                     case 7:
                         Scanner entrada = new Scanner(System.in);
-                        System.out.println("asignando miembro...");
+                        System.out.println("Asignando miembro...");
+
+                        // Mostrar entrenadores existentes
                         Recepcionista.mostrarElementosLista(gym.getGestionEntrenadores());
-                        System.out.println("ingrese el documento del entrenador que quieras");
+
+                        // Solicitar documento del entrenador
+                        System.out.println("Ingrese el documento del entrenador al que desea asignar un miembro:");
                         String documento2 = entrada.nextLine();
-                        recepcionista1.agregarMiembroAEntrenador(gym.getGestionEntrenadores(),recepcionista.crearMiembro(), documento2);
+
+                        // Consultar el entrenador existente en la lista
+                        Entrenador entrenadorExistente = gym.getGestionEntrenadores().consultar(documento2);
+
+                        if (entrenadorExistente != null) {
+                            // Crear y asignar un nuevo miembro al entrenador existente
+                            Miembro nuevoMiembro = recepcionista.crearMiembro();
+                            entrenadorExistente.asignarMiembro(nuevoMiembro);
+                            System.out.println("Miembro asignado correctamente.");
+                        } else {
+                            System.out.println("No se encontró un entrenador con el documento proporcionado.");
+                        }
                         break;
+
                     case 8:
-                        Entrenador entrenadorr = new Entrenador();
-                        System.out.println("cantidad miembros x entrenador");
-                        entrenadorr.consultarMiembros();
+                        Scanner entradaa = new Scanner(System.in);
+                        System.out.println("Mostrar miembros asignados a un entrenador...");
+
+                        // Mostrar entrenadores disponibles
+                        Recepcionista.mostrarElementosLista(gym.getGestionEntrenadores());
+
+                        // Solicitar el documento del entrenador
+                        System.out.println("Ingrese el documento del entrenador para ver sus miembros asignados:");
+                        String documentoEntrenador = entradaa.nextLine();
+
+                        // Buscar al entrenador
+                        Entrenador entrenadorParaConsultar = gym.getGestionEntrenadores().consultar(documentoEntrenador);
+
+                        if (entrenadorParaConsultar != null) {
+                            // Llamar al método para consultar y mostrar los miembros asignados
+                            entrenadorParaConsultar.consultarMiembros();
+                        } else {
+                            System.out.println("No se encontró un entrenador con el documento proporcionado.");
+                        }
                         break;
+
                     case 0:
                         System.out.println("Volviendo al Menú Principal...");
                         break;

@@ -52,11 +52,7 @@ Main {
 
 
 
-        System.out.println("++++");
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro1.getDocumento(), miembro1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionMiembros(), miembro2.getDocumento(), miembro2);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento1.getDocumento(), mantenimiento1);
-        recepcionista1.agregarDeLista(GimnasioUTN.getGestionPersonalMantenimiento(), mantenimiento2.getDocumento(), mantenimiento2);
+
 
         /*
         //se exportan todos los datos en distintos archivos
