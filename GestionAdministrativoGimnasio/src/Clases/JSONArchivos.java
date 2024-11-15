@@ -454,17 +454,28 @@ public final class JSONArchivos {
                 return;
             }
 
+            // Verifica el contenido del archivo para ayudar a detectar errores de formato
+            String contenido = tokener.toString();
+            System.out.println("Contenido del archivo JSON: " + contenido);
+
+            // Verificar que el archivo JSON comience con un arreglo '['
+            if (!contenido.trim().startsWith("[")) {
+                System.out.println("El archivo JSON no comienza con un arreglo, formato incorrecto.");
+                return;
+            }
+
+            // Asegurarse de que el archivo JSON esté bien formado (debe ser un array de objetos)
             JSONArray jsonArray = new JSONArray(tokener);
             if (jsonArray.length() == 0) {
                 System.out.println("El archivo JSON está vacío.");
                 return;
             }
 
+            // Iterar sobre los objetos del JSON
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-             // Imprimir el objeto actual para verificar su contenido
-
+                // Extraer los datos del entrenador desde el objeto JSON
                 String nombre = jsonObject.getString("nombre");
                 String apellido = jsonObject.getString("apellido");
                 String documento = jsonObject.getString("documento");
@@ -474,12 +485,11 @@ public final class JSONArchivos {
                 eEspecialidad especialidadEnum = eEspecialidad.valueOf(jsonObject.getString("especialidad").toUpperCase());
                 Especialidad especialidad = new Especialidad("Sin descripción", especialidadEnum);
 
+                // Crear el objeto Entrenador
                 Entrenador entrenador = new Entrenador(nombre, apellido, documento, LocalDate.now(), salario, "", especialidad);
 
-                // Agregar entrenador al gimnasio
+                // Agregar el entrenador al gimnasio
                 gimnasio.getGestionEntrenadores().agregar(documento, entrenador);
-
-
             }
 
         } catch (Exception e) {
@@ -491,16 +501,22 @@ public final class JSONArchivos {
 
 
 
+
     // Importar Personal de Mantenimiento desde archivo JSON
     public static void importarPersonalMantenimientoDesdeJson(Gimnasio gimnasio) {
         try {
-
+            // Leer el archivo JSON
             JSONTokener tokener = leerArchivoTokener("PersonalMantenimiento.json");
             if (tokener == null) return;
 
+            String contenidoArchivo = tokener.toString();
+            // Verificar si el contenido del archivo comienza con '[' (arreglo)
+            if (!contenidoArchivo.trim().startsWith("[")) {
+                System.out.println("El archivo no comienza con un arreglo JSON. Formato incorrecto.");
+                return;
+            }
 
             JSONArray jsonArray = new JSONArray(tokener);
-
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -511,9 +527,7 @@ public final class JSONArchivos {
                 int salario = jsonObject.getInt("salario");
                 String horario = jsonObject.getString("horario");
 
-
                 PersonalMantenimiento personal = new PersonalMantenimiento(nombre, apellido, documento, fechaNacimiento, salario, horario);
-
 
                 gimnasio.getGestionPersonalMantenimiento().agregar(documento, personal);
             }
@@ -521,6 +535,7 @@ public final class JSONArchivos {
             e.printStackTrace();
         }
     }
+
 
     //metodo que elimina
     public static void eliminarEntrenadorPorDni(String dni, String archivoJson) {
