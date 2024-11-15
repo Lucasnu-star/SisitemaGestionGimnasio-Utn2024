@@ -15,6 +15,8 @@ public class GestionGenericaGimnasio<T>  {
     TreeMap<String, T> gestionUsuario;
 
     //Contructor
+
+    //Elegimos tree map porque guarda de forma ordenada y no acepta repetidos , lo que se nececita para un codigo más ordenado
     public GestionGenericaGimnasio() {
         this.gestionUsuario = new TreeMap<>();
     }
@@ -28,11 +30,20 @@ public class GestionGenericaGimnasio<T>  {
 
 
     //ToString
+
     @Override
     public String toString() {
-        return "GestionGimnasio " +
-                "gestionUsuario=" + gestionUsuario;
+        final StringBuilder sb = new StringBuilder("GestionGenericaGimnasio{");
+        sb.append("gestionUsuario=");
+        for (Map.Entry<String, T> rec : getGestionUsuario().entrySet()) {
+            String clave = rec.getKey();  // Obtiene la clave del mapa
+            T valor = rec.getValue();     // Obtiene el valor del mapa
+            sb.append(valor);
+        }
+        sb.append('}');
+        return sb.toString();
     }
+
     public void agregar(String clave, T obj) {
         gestionUsuario.put(clave, obj);
     }
@@ -151,6 +162,8 @@ public class GestionGenericaGimnasio<T>  {
 
         return miembro;
     }
+
+
 ///crear personal de mantenimiento
     public PersonalMantenimiento crearPersonalMantenimiento (){
         PersonalMantenimiento personalMantenimiento = new PersonalMantenimiento();
@@ -165,6 +178,7 @@ public class GestionGenericaGimnasio<T>  {
         personalMantenimiento.setFechaNacimiento(LocalDate.parse(scanner.nextLine()));
         return personalMantenimiento;
     }
+
     //crear maquina
     public Maquina crearMaquina(){
 

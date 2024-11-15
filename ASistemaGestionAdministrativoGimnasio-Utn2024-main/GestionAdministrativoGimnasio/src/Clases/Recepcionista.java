@@ -43,16 +43,18 @@ public final class Recepcionista extends Empleado {
     }
 
     // Verificando membresia del miembro.
-    public String verificarMembresia(Miembro miembro) throws ExcepcionMembresiaExpirada {
+    public void verificarMembresia(Gimnasio gimnasio , String Dni) throws ExcepcionMembresiaExpirada {
+        Miembro miembro = gimnasio.getGestionMiembros().getGestionUsuario().get(Dni);
         if (miembro == null) {
             throw new IllegalArgumentException("El miembro no puede ser nulo.");
         }
-
-        if (!miembro.isEstadoMembresia()) {
-            throw new ExcepcionMembresiaExpirada("La membresía del miembro " + miembro.getNombre() + " ha expirado.");
+        if (miembro.isEstadoMembresia() == true) {
+            System.out.println("La membresia del miembro esta activa");
+        }else
+        {
+            throw new ExcepcionMembresiaExpirada("La membresia esta expirada");
         }
 
-        return "La membresía del miembro " + miembro.getNombre() + " está activa.";
     }
 
     //Metodos
@@ -133,7 +135,7 @@ public final class Recepcionista extends Empleado {
         }
     }
 
-    //modificcar entrenador
+    //modificar entrenador
     public static void modificarEntrenador(String dni, GestionGenericaGimnasio<Entrenador> lista) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingresa el nuevo nombre:");
@@ -157,6 +159,7 @@ public final class Recepcionista extends Empleado {
         }
     }
 
+    //Modificar miembro
     public static void modificarMiembro(String dni, GestionGenericaGimnasio<Miembro> lista) {
         Scanner scanner = new Scanner(System.in);
 
@@ -192,6 +195,7 @@ public final class Recepcionista extends Empleado {
         }
     }
 
+    //Modificar personal mantenimiento
     public static void modificarPersonaldeMantenimiento (String dni, GestionGenericaGimnasio<PersonalMantenimiento> lista) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingresa el nuevo nombre:");
@@ -215,6 +219,7 @@ public final class Recepcionista extends Empleado {
         }
     }
 
+    //Modificar maquina
     public static void modificarMaquina(String id, GestionGenericaGimnasio<Maquina> lista) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingresa el nuevo nombre:");

@@ -4,112 +4,53 @@ import org.json.JSONArray;
 import java.util.Scanner;
 public class Menu {
 
-
-/*
-    public static void MenuPrincipal(){
-    Scanner scanner = new Scanner(System.in);
-    int opcion;
-
-
-        do
-
-    {
-        // Mostrar el menú principal
-        System.out.println("\nMenú Principal:");
-        System.out.println("1. Entrenadores");
-        System.out.println("2. Miembros");
-        System.out.println("3. Máquinas");
-        System.out.println("4. Personal de Mantenimiento");
-        System.out.println("0. Salir del Programa");
-        System.out.print("Ingrese una opción: ");
-        opcion = scanner.nextInt();
-
-        switch (opcion) {
-            case 1:
-                // Llamar entrenadores
-                mostrarMenuEntrenadores(scanner);
-                break;
-            case 2:
-                // Llamar miembros
-                mostrarMenuMiembros(scanner);
-                break;
-            case 3:
-                // Llamar maquinas
-                mostrarMenuMaquinas(scanner);
-                break;
-            case 4:
-                // Llamar personal de mantenimiento
-                mostrarMenuMantenimiento(scanner);
-                break;
-            case 0:
-                System.out.println("¡Nos vemos! cerrando porgrama...");
-                break;
-            default:
-                System.out.println("Opción no válida, por favor intente nuevamente.");
-        }
-
-    } while(opcion !=0); // Se cierra el programa cuando se ingrese 0
-}
-
-
-    // Submenú de entrenadores
-    public static void mostrarMenuEntrenadores(Scanner scanner , Gimnasio gym) {
+    //Menu principal
+    public static void MenuPrincipal(Gimnasio gym) {
+        Scanner scanner = new Scanner(System.in);
         int opcion;
+        JSONArchivos.importarEntrenadoresDesdeJson(gym);
+        JSONArchivos.importarMiembrosDesdeJson(gym);
+
+
         do {
-            GestionGenericaGimnasio<Entrenador>recepcionista = new GestionGenericaGimnasio<>();
-            System.out.println("\nMenú entrenadores:");
-            System.out.println("1. Mostrar entrenadores");
-            System.out.println("2. Consultar entrenador");
-            System.out.println("3. Agregar entrenador");
-            System.out.println("4. Modificar entrenador");
-            System.out.println("5. Eliminar entrenador");
-            System.out.println("6. Guardar en archivo");
-            System.out.println("0. Volver al Menú Principal");
+
+            // Mostrar el menú principal
+            System.out.println("\nMenú Principal:");
+            System.out.println("1. Entrenadores");
+            System.out.println("2. Miembros");
+            System.out.println("3. Máquinas");
+            System.out.println("4. Personal de Mantenimiento");
+
+            System.out.println("0. Salir del Programa");
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Mostrar entrenadores...");
-                    recepcionista.mostrarTodos();
+                    // Llamar entrenadores
+                    Menu.mostrarMenuEntrenadores(gym);
                     break;
                 case 2:
-                    System.out.println("Consultar entrenador...");
-                    System.out.println("ingrese DNI del entrenador a buscar...");
-                    String dni = scanner.nextLine();
-                    recepcionista.consultar(dni);
+                    // Llamar miembros
+                    Menu.mostrarMenuMiembros(gym);
                     break;
                 case 3:
-                    System.out.println("Agregar entrenador...");
-                    recepcionista.agregar(recepcionista.crearEntrenador().getDocumento(),recepcionista.crearEntrenador());
+                    // Llamar maquinas
+                    Menu.mostrarMenuMaquinas(gym);
                     break;
                 case 4:
-                    System.out.println("Modificar entrenador...");
-                    recepcionista.modificarEntrenador();
-                    break;
-                case 5:
-                    System.out.println("Eliminar entrenador...");
-                    System.out.println("ingrese documento del entrenador a eliminar");
-                    recepcionista.eliminar(scanner.nextLine());
-                    break;
-                case 6:
-                    System.out.println("Guardar en archivo...");
-                    JSONArchivos.importarEntrenadoresDesdeJson(gym);
+                    // Llamar personal de mantenimiento
+                    Menu.mostrarMenuMantenimiento(gym);
                     break;
                 case 0:
-                    System.out.println("Volviendo al Menú Principal...");
-                    Menu.MenuPrincipal();
+                    System.out.println("¡Nos vemos! cerrando programa...");
                     break;
                 default:
                     System.out.println("Opción no válida, por favor intente nuevamente.");
             }
-        } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
+        } while (opcion != 0); // Se cierra el programa cuando se ingrese 0
     }
-
-*/
-
-
-     //Submenú de miembros
+    //Submenú de miembros
      public static void mostrarMenuMiembros(Gimnasio gym) {
          Scanner teclado = new Scanner(System.in);
          Recepcionista recepcionista = new Recepcionista();
@@ -117,8 +58,6 @@ public class Menu {
          int opcion;
 
          do {
-
-
              System.out.println("\nMenú miembros:");
              System.out.println("1. Mostrar Miembros");
              System.out.println("2. Consultar Miembro");
@@ -127,7 +66,7 @@ public class Menu {
              System.out.println("5. Eliminar Miembro");
              System.out.println("6. Ver lista");
              System.out.println("7. Guardar en archivo");
-
+             System.out.println("8. Verificar membresia");
              System.out.println("0. Volver al Menú Principal");
              System.out.print("Ingrese una opción: ");
              opcion = teclado.nextInt();
@@ -172,14 +111,22 @@ public class Menu {
                      JSONArchivos.eliminarMiembroPorDni(dniEliminar, "Miembros.json");
                      break;
                  case 6:
-                     System.out.println("Ver lista de miembros...");
-
+                     System.out.println("Ver archivo de miembros...");
+                     JSONArchivos.importarMiembrosDesdeJson(gym);
+                     Recepcionista.mostrarElementosLista(gym.getGestionMiembros());
                      break;
                  case 7:
                      System.out.println("Guardando en archivo...");
                      JSONArchivos.exportarMiembrosAJson(gym);
                      JSONArchivos.exportarListaMiembros(gym);
                      break;
+                 case   8:
+                     Scanner scanner = new Scanner(System.in);
+                     System.out.println("Verificando membresia...");
+                     Recepcionista.mostrarElementosLista(gym.getGestionMiembros());
+                     System.out.println("Ingrese el dni del usuario a verificar la membresia");
+                     String dnii = scanner.nextLine();
+                     recepcionista.verificarMembresia(gym,dnii);
                  case 0:
                      System.out.println("Volviendo al Menú Principal...");
                      break;
@@ -188,8 +135,6 @@ public class Menu {
              }
          } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menú principal
      }
-
-
 
      //Submenú de máquinas
      public static void mostrarMenuMaquinas(Gimnasio gym) {
@@ -265,50 +210,6 @@ public class Menu {
          } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
      }
 
-    // Submenú de recepcionistas
-    public static void mostrarMenuRecepcionistas(Gimnasio gimnasio){
-    Scanner scanner = new Scanner(System.in);
-    int opcion;
-        do {
-            System.out.println("\nMenú recepcionistas:");
-            System.out.println("1. Mostrar recepcionistas");
-            System.out.println("2. Consultar recepcionista");
-            System.out.println("3. Agregar recepcionista");
-            System.out.println("4. Modificar recepcionista");
-            System.out.println("5. Eliminar recepcionista");
-            System.out.println("6. Guardar en archivo");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Ingrese una opción: ");
-            opcion = scanner.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    System.out.println("Mostrar recepcionistas...");
-                    break;
-                case 2:
-                    System.out.println("Consultar recepcionista...");
-                    break;
-                case 3:
-                    System.out.println("Agregar recepcionista...");
-                    break;
-                case 4:
-                    System.out.println("Modificar recepcionista...");
-                    break;
-                case 5:
-                    System.out.println("Eliminar recepcionista...");
-                    break;
-                case 6:
-                    System.out.println("Guardar en archivo...");
-                    break;
-                case 0:
-                    System.out.println("Volviendo al Menú Principal...");
-                    break;
-                default:
-                    System.out.println("Opción no válida, por favor intente nuevamente.");
-            }
-        } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
-    }
-
     //Submenu mantenimiento
     public static void mostrarMenuMantenimiento(Gimnasio gym) {
         Scanner scanner = new Scanner(System.in);
@@ -373,55 +274,6 @@ public class Menu {
                     System.out.println("Opción no válida, por favor intente nuevamente.");
             }
         } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
-    }
-
-
-
-
-    public static void MenuPrincipal(Gimnasio gym) {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-        JSONArchivos.importarEntrenadoresDesdeJson(gym);
-        JSONArchivos.importarMiembrosDesdeJson(gym);
-
-
-        do {
-
-            // Mostrar el menú principal
-            System.out.println("\nMenú Principal:");
-            System.out.println("1. Entrenadores");
-            System.out.println("2. Miembros");
-            System.out.println("3. Máquinas");
-            System.out.println("4. Personal de Mantenimiento");
-
-            System.out.println("0. Salir del Programa");
-            System.out.print("Ingrese una opción: ");
-            opcion = scanner.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    // Llamar entrenadores
-                    Menu.mostrarMenuEntrenadores(gym);
-                    break;
-                case 2:
-                    // Llamar miembros
-                    Menu.mostrarMenuMiembros(gym);
-                    break;
-                case 3:
-                    // Llamar maquinas
-                    Menu.mostrarMenuMaquinas(gym);
-                    break;
-                case 4:
-                    // Llamar personal de mantenimiento
-                    Menu.mostrarMenuMantenimiento(gym);
-                    break;
-                case 0:
-                    System.out.println("¡Nos vemos! cerrando programa...");
-                    break;
-                default:
-                    System.out.println("Opción no válida, por favor intente nuevamente.");
-            }
-        } while (opcion != 0); // Se cierra el programa cuando se ingrese 0
     }
 
         // Submenú de entrenadores
@@ -534,9 +386,7 @@ public class Menu {
                         Scanner tecla = new Scanner(System.in);
                         System.out.println("Calculando salario..");
                         System.out.println("Ingrese dni ");
-
                         Recepcionista.calcularSalario(gym.getGestionEntrenadores(), tecla.nextLine() );
-
                         break;
                     case 9:
                         System.out.println("Guardando en archivo...");

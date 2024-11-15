@@ -296,6 +296,7 @@ public final class JSONArchivos {
         }
     }
 
+    //Importar membresia desde archivo JSON
 
     public static Membresia importarMembresiaDesdeJson(JSONObject jsonObject) {
         Membresia membresia = new Membresia();
@@ -452,7 +453,7 @@ public final class JSONArchivos {
     }
 
 
-    //metodo que elimina
+    //metodo que elimina entrenador por dni
     public static void eliminarEntrenadorPorDni(String dni, String archivoJson) {
         try {
             // Leer el archivo JSON
@@ -566,6 +567,7 @@ public final class JSONArchivos {
         }
     }
 
+    //Importar maquinas de JSON
     public static void importarMaquinasDesdeJson(GestionGenericaGimnasio<Maquina> gestionMaquinas) {
     }
 
@@ -579,6 +581,7 @@ public final class JSONArchivos {
         // Escribir el objeto JSON en un archivo
         EscribirArchivoObjeto("Maquinas.json", jsonObject);
     }
+
 
     public static void exportarEntrenadorAJson(Entrenador entrenador) {
         // Crear un JSONObject para almacenar los datos del entrenador

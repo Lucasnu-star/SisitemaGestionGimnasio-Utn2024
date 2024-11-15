@@ -68,23 +68,7 @@ public final class Especialidad {
             }
         }
     }
-    /*
-    // Mostrar miembros por especialidad
-    public void mostrarMiembrosPorEspecialidad(Especialidad tipo, GestionGenericaGimnasio gestionGym) {
-        System.out.println("Miembros interesados en la especialidad: " + tipo);
-        List<Miembro> todosMiembros = gestionGym.consultarPorClase(Miembro.class);
 
-        for (Miembro miembro : todosMiembros) {
-            if (miembro.getEntrenadorAsingado().getEspecialidad().equals(tipo.getEspecialidad())) {
-                System.out.println(miembro);
-            }
-        }
-    }
-
-
-
-
-     */
 
     // Método para convertir un JSONObject en una instancia de Especialidad
     public static Especialidad fromJSONObject(JSONObject jsonObject) {

@@ -48,7 +48,6 @@ public abstract class Empleado  extends Usuario{
     @Override
     public String toString() {
         return super.toString() +
-                " Empleado " +
                 "salario=" + salario +
                 ", horario=" + horario ;
     }

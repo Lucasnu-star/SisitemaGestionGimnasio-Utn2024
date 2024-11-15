@@ -77,8 +77,8 @@ public final class Entrenador extends Empleado {
 
     @Override
     public String toString() {
-        return super.toString() +
-                " Entrenador " +
+        return  "Entrenador: "+
+                super.toString() +
                 "especialidad=" + especialidad +
                 ", certificados=" + certificados;
     }
@@ -114,6 +114,7 @@ public final class Entrenador extends Empleado {
         }
     }
 
+    //Eliminar miembro de los asignados
     public void eliminarMiembro(Miembro miembro)
     {
         if (miembrosAsignados.contains(miembro))

@@ -136,5 +136,5 @@ public final class Gimnasio {
                 ", especialidadesGimnasio=" + especialidadesGimnasio;
     }
 
-    //Metodos
+
     }

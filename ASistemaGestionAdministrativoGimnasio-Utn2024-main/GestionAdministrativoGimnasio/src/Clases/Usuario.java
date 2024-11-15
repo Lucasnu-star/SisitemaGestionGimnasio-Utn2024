@@ -70,8 +70,7 @@ public abstract class Usuario {
     //ToString
     @Override
     public String toString() {
-        return "Usuario " +
-                "nombre='" + nombre + '\'' +
+        return "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", documento='" + documento + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento;
