@@ -75,11 +75,9 @@ public final class Miembro extends Usuario{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Miembro{");
-        sb.append("membresia=").append(membresia);
-        sb.append(", estadoMembresia=").append(estadoMembresia);
-        sb.append(", fechaIncripcion=").append(fechaIncripcion);
-        sb.append('}');
-        return sb.toString();
+        return "Miembro" + super.toString() +
+                "membresia=" + membresia +
+                ", estadoMembresia=" + estadoMembresia +
+                ", fechaIncripcion=" + fechaIncripcion  ;
     }
 }

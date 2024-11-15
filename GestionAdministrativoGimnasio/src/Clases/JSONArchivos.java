@@ -98,10 +98,19 @@ public final class JSONArchivos {
             jsonObject.put("documento", miembro.getDocumento());
             jsonObject.put("fechaNacimiento", miembro.getFechaNacimiento().toString());
             jsonObject.put("fechaIncripcion", miembro.getFechaIncripcion());
-            jsonObject.put("descripcion", membresiaToJsonObject(miembro.getMembresia()));
+            jsonObject.put("membresia", membresiaToJsonObject(miembro.getMembresia()));
             jsonObject.put("estadoMembresia", miembro.isEstadoMembresia());
             jsonArray.put(jsonObject);
         }
+        try (FileWriter file = new FileWriter("Miembros.json")) {
+            file.write(jsonArray.toString(4)); // Indentado para mejor legibilidad
+            System.out.println("Miembros exportados a JSON exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al exportar miembros a JSON: " + e.getMessage());
+        }
+
+
         return jsonArray;
     }
 
@@ -156,6 +165,14 @@ public final class JSONArchivos {
             }
             jsonObject.put("miembrosAsignados", miembrosAsignadosArray);
             jsonArray.put(jsonObject);
+        }
+
+        try (FileWriter file = new FileWriter("Entrenadores.json")) {
+            file.write(jsonArray.toString(4)); // Indentado para mejor legibilidad
+            System.out.println("Entrenador exportados a JSON exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al exportar entrenador a JSON: " + e.getMessage());
         }
         return jsonArray;
     }
@@ -237,18 +254,28 @@ public final class JSONArchivos {
     }
 
 
+
+
     public static void importarMiembrosDesdeJson(Gimnasio gimnasio) {
         try {
-
             JSONTokener tokener = leerArchivoTokener("Miembros.json");
-            if (tokener == null) return;
-
+            if (tokener == null) {
+                System.out.println("El archivo no fue leído correctamente.");
+                return;
+            }
 
             JSONArray jsonArray = new JSONArray(tokener);
-
+            if (jsonArray.length() == 0) {
+                System.out.println("El archivo JSON está vacío.");
+                return;
+            }
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                // Imprimir el objeto actual para verificar su contenido
+                System.out.println("Miembro JSON: " + jsonObject);
+
                 String nombre = jsonObject.getString("nombre");
                 String apellido = jsonObject.getString("apellido");
                 String documento = jsonObject.getString("documento");
@@ -257,30 +284,39 @@ public final class JSONArchivos {
                 boolean estadoMembresia = jsonObject.getBoolean("estadoMembresia");
                 LocalDate fechaIncripcion = LocalDate.parse(jsonObject.getString("fechaIncripcion"));
 
-
                 Miembro miembro = new Miembro(nombre, apellido, documento, fechaNacimiento, membresia, estadoMembresia, fechaIncripcion);
 
+                // Agregar miembro al gimnasio
                 gimnasio.getGestionMiembros().agregar(documento, miembro);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error al importar miembros: " + e.getMessage());
         }
     }
 
-    public static Membresia importarMembresiaDesdeJson(JSONObject jsonObject){
+    public static Membresia importarMembresiaDesdeJson(JSONObject jsonObject) {
         Membresia membresia = new Membresia();
         try {
+
+
+
             if (jsonObject.has("descripcion")) {
                 membresia.setDescripcion(jsonObject.getString("descripcion"));
             } else {
                 System.out.println("Clave 'descripcion' no encontrada.");
-                membresia.setDescripcion(""); // o asigna un valor predeterminado
+                membresia.setDescripcion("Descripción predeterminada");
             }
 
             if (jsonObject.has("tipoMembresia")) {
                 String tipo = jsonObject.getString("tipoMembresia");
-                eTIPOMEMBRESIA tipomembresia = eTIPOMEMBRESIA.valueOf(tipo);
-                membresia.setTipomembresia(tipomembresia);
+                try {
+                    eTIPOMEMBRESIA tipoMembresiaEnum = eTIPOMEMBRESIA.valueOf(tipo.toUpperCase());
+                    membresia.setTipomembresia(tipoMembresiaEnum);
+                } catch (IllegalArgumentException e) {
+
+                }
             } else {
                 System.out.println("Clave 'tipoMembresia' no encontrada.");
             }
@@ -291,8 +327,9 @@ public final class JSONArchivos {
                 System.out.println("Clave 'costoMensual' no encontrada.");
             }
 
-        } catch (IllegalArgumentException e){
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error al deserializar membresía: " + e.getMessage());
         }
         return membresia;
     }
@@ -346,7 +383,7 @@ public final class JSONArchivos {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                // Imprimir el objeto actual para verificar su contenido
+             // Imprimir el objeto actual para verificar su contenido
                 System.out.println("Entrenador JSON: " + jsonObject);
 
                 String nombre = jsonObject.getString("nombre");

@@ -2,7 +2,13 @@ package Clases;
 
 import Excepciones.ExcepcionMembresiaExpirada;
 import Interfaces.iReportarMaquina;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -25,6 +31,7 @@ public final class Recepcionista extends Empleado {
     public Recepcionista(String nombre, String apellido, String documento, LocalDate fechaNacimiento, int salario, String horario) {
         super(nombre, apellido, documento, fechaNacimiento, salario, horario);
     }
+
     public Recepcionista() {
     }
 
@@ -45,35 +52,52 @@ public final class Recepcionista extends Empleado {
             throw new ExcepcionMembresiaExpirada("La membresía del miembro " + miembro.getNombre() + " ha expirado.");
         }
 
-        return  "La membresía del miembro " + miembro.getNombre() + " está activa.";
+        return "La membresía del miembro " + miembro.getNombre() + " está activa.";
     }
 
     //Metodos
-    public static  <T> void agregarDeLista(GestionGenericaGimnasio<T> lista, String clave, T obj){
+    public static <T> void agregarDeLista(GestionGenericaGimnasio<T> lista, String clave, T obj) {
         lista.agregar(clave, obj);
     }
 
-    public static <T> void eliminarDeLista(GestionGenericaGimnasio<T> lista, String clave){
-       lista.eliminar(clave);
+    public static <T> void eliminarDeLista(GestionGenericaGimnasio<T> lista, String clave) {
+        lista.eliminar(clave);
     }
 
     // Metodo para consultar un miembro por clave
-    public static  <T> T consultar(GestionGenericaGimnasio<T> lista, String key) {
-        T t=  lista.consultar(key);
+    public static <T> T consultar(GestionGenericaGimnasio<T> lista, String key) {
+        T t = lista.consultar(key);
         return t;
     }
 
     // Metodo para calcular salario por entrenador:cada 5 miembros asignados se le suma un porcentaje
 
-    public void calcularSalario(GestionGenericaGimnasio<Entrenador> gestionEntrenadores, Entrenador entrenador) {
-        double salarioBase = entrenador.getSalario();
-        int cantidadMiembros = entrenador.getMiembrosAsignados().size();
+    public static void calcularSalario(GestionGenericaGimnasio<Entrenador> gestionEntrenadores, String dni) {
 
-        int incrementos = cantidadMiembros / 5;
-        double salarioFinal = salarioBase * (1 + (0.10 * incrementos));
+        Entrenador entrenador= new Entrenador();
+        try
+        {
 
-        System.out.println("Salario del entrenador después de bonificación: " + salarioFinal);
-    }
+
+        for (Map.Entry<String, Entrenador> entrenadorr : gestionEntrenadores.getGestionUsuario().entrySet()) {
+                if(Objects.equals(entrenadorr.getValue().getDocumento(), dni))
+                {
+                    double salarioBase = entrenador.getSalario();
+
+                    int cantidadMiembros = entrenador.getMiembrosAsignados().size();
+
+                    int incrementos = cantidadMiembros / 2;
+                    double salarioFinal = salarioBase * (1 + (0.10 * incrementos));
+
+                    System.out.println("Salario del entrenador después de bonificación: " + salarioFinal);
+
+                }
+        }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        }
+
 
 
     // Metodo para asignar un miembro a un entrenador
@@ -100,9 +124,9 @@ public final class Recepcionista extends Empleado {
         }
     }
 
-    public static <T> void mostrarElementosLista(GestionGenericaGimnasio<T> gestionEntrenadores) {
+    public static <T> void mostrarElementosLista(GestionGenericaGimnasio<T> gestion) {
         System.out.println("Lista de elementos en GestionGym:");
-        for (Map.Entry<String, T> rec : gestionEntrenadores.getGestionUsuario().entrySet()) {
+        for (Map.Entry<String, T> rec : gestion.getGestionUsuario().entrySet()) {
             String clave = rec.getKey();  // Obtiene la clave del mapa
             T valor = rec.getValue();     // Obtiene el valor del mapa
             System.out.println("Clave: " + clave + ", Valor: " + valor);
@@ -132,9 +156,6 @@ public final class Recepcionista extends Empleado {
             System.out.println("No se encontró un entrenador con el documento: " + dni);
         }
     }
-
-    //modificar miembro
-
 
     public static void modificarMiembro(String dni, GestionGenericaGimnasio<Miembro> lista) {
         Scanner scanner = new Scanner(System.in);
@@ -171,4 +192,15 @@ public final class Recepcionista extends Empleado {
         }
     }
 
+
+
+
 }
+
+
+
+
+
+
+
+

@@ -1,1 +1,18 @@
-[{"apellido":"rognoni","salario":0,"documento":"123456","miembrosAsignados":[],"nombre":"dante","especialidad":"BOXEO"},{"apellido":"rognoni","salario":0,"documento":"123456","miembrosAsignados":[],"nombre":"dante","especialidad":"BOXEO"}]
+[
+    {
+        "apellido": "nunez",
+        "salario": 0,
+        "documento": "12345",
+        "miembrosAsignados": [],
+        "nombre": "lucas",
+        "especialidad": "CARDIO"
+    },
+    {
+        "apellido": "nunez",
+        "salario": 0,
+        "documento": "12345",
+        "miembrosAsignados": [],
+        "nombre": "lucas",
+        "especialidad": "CARDIO"
+    }
+]

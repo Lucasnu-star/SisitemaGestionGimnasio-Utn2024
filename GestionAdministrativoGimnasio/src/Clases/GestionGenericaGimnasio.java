@@ -132,10 +132,12 @@ public class GestionGenericaGimnasio<T>  {
         // Asignamos el costo mensual dependiendo del tipo de membresía
         switch (membresias[opcionMembresia - 1]) {
             case membresiaBasica:
-                membresia.setCostoMensual(300); // Costo mensual para membresía anual
+                membresia.setCostoMensual(300);
+                membresia.setDescripcion("Membresia de 3 dias a la semana con profesor personal");// Costo mensual para membresía anual
                 break;
             case membresiaPremium:
-                membresia.setCostoMensual(700); // Costo mensual para membresía semestral
+                membresia.setCostoMensual(700);
+                membresia.setDescripcion("Membresia libre con profesor personal y baños con ducha");// Costo mensual para membresía semestral
                 break;
             default:
                 System.out.println("Opción de membresía no válida.");

@@ -52,42 +52,6 @@ Main {
 
 
 
-
-
-        /*
-        //se exportan todos los datos en distintos archivos
-        JSONArchivos.exportarDatosGimnasio(GimnasioUTN);
-        JSONArchivos.exportarEntrenadoresAJson(GimnasioUTN);
-        JSONArchivos.exportarListaEntrenadores(GimnasioUTN);
-        JSONArchivos.exportarMiembrosAJson(GimnasioUTN);
-        JSONArchivos.exportarListaMiembros(GimnasioUTN);
-        JSONArchivos.exportarPersonalMantenimientoAJson(GimnasioUTN);
-        JSONArchivos.exportarListaPersonalMantenimiento(GimnasioUTN);
-
-         */
-
-        System.out.println(GimnasioUTN.getGestionPersonalMantenimiento().toString());
-
-        //se tiene que crear otro gimnasio en donde se reciben sus datos
-        Gimnasio gimnasio = JSONArchivos.importarDatosGimnasioDesdeJson();
-/*
-        // Verificar los datos del gimnasio
-        System.out.println("Datos del gimnasio: ");
-        System.out.println(gimnasio);
-
-
-        JSONArchivos.importarMiembrosDesdeJson(gimnasio);
-
-        // Verificar si los miembros fueron correctamente importados
-        System.out.println("Miembros en el gimnasio:");
-        for (Miembro miembro : gimnasio.getGestionMiembros().getGestionUsuario().values()) {
-            System.out.println("Nombre: " + miembro.getNombre() +
-                    ", Membresía: " + miembro.getMembresia().getTipomembresia()+ "fecha" + miembro.getFechaNacimiento()+ "apeliido"+miembro.getApellido() + "documento"+miembro.getDocumento());
-        }
-
- */
-
-
         System.out.println(GimnasioUTN.getGestionEntrenadores());
 
         Menu.MenuPrincipal(GimnasioUTN);

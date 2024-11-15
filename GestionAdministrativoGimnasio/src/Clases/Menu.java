@@ -121,6 +121,8 @@ public class Menu {
          int opcion;
 
          do {
+
+
              System.out.println("\nMenú miembros:");
              System.out.println("1. Mostrar Miembros");
              System.out.println("2. Consultar Miembro");
@@ -135,7 +137,7 @@ public class Menu {
              switch (opcion) {
                  case 1:
                      System.out.println("Mostrar miembros...");
-                     recepcionista.mostrarElementosLista(gym.getGestionMiembros());
+                     Recepcionista.mostrarElementosLista(gym.getGestionMiembros());
                      break;
                  case 2:
                      System.out.println("Consultar miembro...");
@@ -161,6 +163,7 @@ public class Menu {
                      System.out.println("Ingrese el DNI del miembro a modificar:");
                      String documento = scan.nextLine();
                      Recepcionista.modificarMiembro(documento, gym.getGestionMiembros());
+                     JSONArchivos.exportarMiembrosAJson(gym);
                      break;
                  case 5:
                      System.out.println("Eliminar miembro...");
@@ -173,7 +176,9 @@ public class Menu {
                  case 6:
                      System.out.println("Ver lista de miembros...");
                      JSONArchivos.importarMiembrosDesdeJson(gym);
+
                      break;
+
                  case 0:
                      System.out.println("Volviendo al Menú Principal...");
                      break;
@@ -322,6 +327,7 @@ public class Menu {
         int opcion;
 
         do {
+
             // Mostrar el menú principal
             System.out.println("\nMenú Principal:");
             System.out.println("1. Entrenadores");
@@ -329,6 +335,7 @@ public class Menu {
             System.out.println("3. Máquinas");
             System.out.println("4. Recepcionistas");
             System.out.println("5. Personal de Mantenimiento");
+
             System.out.println("0. Salir del Programa");
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
@@ -379,6 +386,7 @@ public class Menu {
                 System.out.println("6. Ver lista");
                 System.out.println("7. Asignar miembro a entrenador");
                 System.out.println("8. Cantidad de miembros x entrenador");
+                System.out.println("9. Calcular salario");
                 System.out.println("0. Volver al Menú Principal");
                 System.out.print("Ingrese una opción: ");
                 opcion = teclado.nextInt();
@@ -409,6 +417,7 @@ public class Menu {
                         System.out.println("ingrese el dni del entrenador a cambiar");
                         String documento = scaner.nextLine();
                         Recepcionista.modificarEntrenador(documento,gym.getGestionEntrenadores());
+                        JSONArchivos.exportarEntrenadoresAJson(gym);
 
                         break;
                     case 5:
@@ -447,6 +456,7 @@ public class Menu {
                         } else {
                             System.out.println("No se encontró un entrenador con el documento proporcionado.");
                         }
+                        JSONArchivos.exportarEntrenadoresAJson(gym);
                         break;
 
                     case 8:
@@ -469,6 +479,14 @@ public class Menu {
                         } else {
                             System.out.println("No se encontró un entrenador con el documento proporcionado.");
                         }
+                        break;
+                    case 9:
+                        Scanner tecla = new Scanner(System.in);
+                        System.out.println("Calculando salario..");
+                        System.out.println("Ingrese dni ");
+
+                        Recepcionista.calcularSalario(gym.getGestionEntrenadores(), tecla.nextLine() );
+
                         break;
 
                     case 0:
