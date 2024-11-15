@@ -1,7 +1,7 @@
 package Enums;
 public enum eEspecialidad {
-    funcional,
-    musculacion,
-    cardio,
-    boxeo,
+    FUNCIONAL,
+    MUSCULACICION,
+    CARDIO,
+    BOXEO,
 }

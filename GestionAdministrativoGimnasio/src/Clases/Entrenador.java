@@ -35,7 +35,7 @@ public final class Entrenador extends Empleado {
         return miembrosAsignados;
     }
 
-    public Especialidad getEspecialidad() {
+    public eEspecialidad getEspecialidad() {
         return especialidad;
     }
 
@@ -91,7 +91,7 @@ public final class Entrenador extends Empleado {
 
     // Metodo para consultar los meimbros de un entreandor
     public void consultarMiembros() {
-        if (miembrosAsignados.isEmpty()) {
+        if (miembrosAsignados == null || miembrosAsignados.isEmpty()) {
             System.out.println("No hay miembros asignados a este entrenador.");
         } else {
             System.out.println("Lista de miembros asignados al entrenador " + getNombre() + ":");
@@ -101,6 +101,7 @@ public final class Entrenador extends Empleado {
             }
         }
     }
+
     // Metodo para agregar un certificado
     public void agregarCertificado(String certificado) {
         if (certificado != null) {

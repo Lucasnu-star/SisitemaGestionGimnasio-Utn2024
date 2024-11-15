@@ -130,7 +130,7 @@ public final class JSONArchivos {
         return jsonArray;
     }
 
-    public static JSONArray exportarEntrenadoresAJson(Gimnasio gimnasio ) {
+    public static JSONArray exportarEntrenadoresAJson(Gimnasio gimnasio) {
         JSONArray jsonArray = new JSONArray();
         for (Entrenador entrenador : gimnasio.getGestionEntrenadores().gestionUsuario.values()) {
             JSONObject jsonObject = new JSONObject();
@@ -138,8 +138,8 @@ public final class JSONArchivos {
             jsonObject.put("apellido", entrenador.getApellido());
             jsonObject.put("documento", entrenador.getDocumento());
             jsonObject.put("salario", entrenador.getSalario());
-            jsonObject.put("especialidad", toJsonObject(entrenador.getEspecialidad())); // Guarda el nombre del enum como string
-
+            jsonObject.put("especialidad", entrenador.getEspecialidad()); // Usar el nombre del enum como string
+            jsonObject.put("miembrosAsignados", exportarMiembrosAJson(gimnasio));
             jsonArray.put(jsonObject);
         }
         return jsonArray;
@@ -318,17 +318,17 @@ public final class JSONArchivos {
                 String apellido = jsonObject.getString("apellido");
                 String documento = jsonObject.getString("documento");
                 int salario = jsonObject.getInt("salario");
-                Especialidad especialidad  =  Especialidad.fromJSONObject(jsonObject.getJSONObject("especialidad"));
 
+                // Ajuste para deserializar la especialidad como String y convertirlo a eEspecialidad
+                eEspecialidad especialidadEnum = eEspecialidad.valueOf(jsonObject.getString("especialidad").toUpperCase());
+                Especialidad especialidad = new Especialidad("Sin descripción", especialidadEnum);
 
-
-
-                Entrenador entrenador = new Entrenador(nombre, apellido, documento, LocalDate.now(), salario, "", especialidad );
+                Entrenador entrenador = new Entrenador(nombre, apellido, documento, LocalDate.now(), salario, "", especialidad);
 
                 // Agregar entrenador al gimnasio
                 gimnasio.getGestionEntrenadores().agregar(documento, entrenador);
 
-                System.out.println("Entrenador agregado: " + entrenador);
+
             }
 
         } catch (Exception e) {
@@ -336,6 +336,7 @@ public final class JSONArchivos {
             System.out.println("Error al importar entrenadores: " + e.getMessage());
         }
     }
+
 
 
 
@@ -370,7 +371,43 @@ public final class JSONArchivos {
         }
     }
 
+    //metodo que elimina
+    public static void eliminarEntrenadorPorDni(String dni, String archivoJson) {
+        try {
+            // Leer el archivo JSON
+            FileReader reader = new FileReader(archivoJson);
+            JSONTokener tokener = new JSONTokener(reader);
+            JSONArray jsonArray = new JSONArray(tokener);
 
+            boolean entrenadorEliminado = false;
+
+            // Buscar el entrenador por dni
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject entrenador = jsonArray.getJSONObject(i);
+                if (entrenador.getString("documento").equals(dni)) {
+                    jsonArray.remove(i); // Eliminar el elemento en el índice i
+                    entrenadorEliminado = true;
+                    break;
+                }
+            }
+
+            // Verificar si se eliminó el entrenador
+            if (entrenadorEliminado) {
+                // Sobrescribir el archivo JSON con los datos modificados
+                FileWriter writer = new FileWriter(archivoJson);
+                writer.write(jsonArray.toString());
+                writer.flush();
+                writer.close();
+                System.out.println("Entrenador con dni " + dni + " eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró un entrenador con el dni: " + dni);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al leer o escribir el archivo: " + e.getMessage());
+        }
+    }
 
 }
 

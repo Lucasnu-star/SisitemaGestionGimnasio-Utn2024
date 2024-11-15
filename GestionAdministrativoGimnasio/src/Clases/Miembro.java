@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.eTIPOMEMBRESIA;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -22,6 +24,8 @@ public final class Miembro extends Usuario{
         this.estadoMembresia = estadoMembresia;
         this.fechaIncripcion = fechaIncripcion;
     }
+    public Miembro(){
+    }
 
     //Getters
 
@@ -42,6 +46,7 @@ public final class Miembro extends Usuario{
     public void setMembresia(Membresia membresia) {
         this.membresia = membresia;
     }
+
 
     public void setEstadoMembresia(boolean estadoMembresia) {
         this.estadoMembresia = estadoMembresia;

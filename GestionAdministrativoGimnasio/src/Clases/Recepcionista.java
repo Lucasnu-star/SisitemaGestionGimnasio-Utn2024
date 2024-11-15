@@ -46,10 +46,9 @@ public final class Recepcionista extends Empleado {
     //Metodos
     public static  <T> void agregarDeLista(GestionGenericaGimnasio<T> lista, String clave, T obj){
         lista.agregar(clave, obj);
-
     }
 
-    public <T> void eliminarDeLista(GestionGenericaGimnasio<T> lista, String clave){
+    public static <T> void eliminarDeLista(GestionGenericaGimnasio<T> lista, String clave){
        lista.eliminar(clave);
     }
 
@@ -105,6 +104,28 @@ public final class Recepcionista extends Empleado {
         }
     }
 
+    //modificcar entrenador
+    public static void modificarEntrenador(String dni, GestionGenericaGimnasio<Entrenador> lista) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingresa el nuevo nombre:");
+        String nuevoNombre = scanner.nextLine();
 
+        boolean entrenadorEncontrado = false;
+
+        for (Map.Entry<String, Entrenador> rec : lista.getGestionUsuario().entrySet()) {
+            if (rec.getKey().equals(dni)) {
+                // Obtener el entrenador actual
+                Entrenador entrenador = rec.getValue();
+                entrenador.setNombre(nuevoNombre); // Modificar el nombre del entrenador
+                entrenadorEncontrado = true;
+                System.out.println("Nombre del entrenador actualizado: " + entrenador);
+                break;
+            }
+        }
+
+        if (!entrenadorEncontrado) {
+            System.out.println("No se encontró un entrenador con el documento: " + dni);
+        }
+    }
 
 }

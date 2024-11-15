@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 
-public class Main {
+public class
+Main {
     public static void main(String[] args) {
 //Creacion instancia Gimnasio
         Gimnasio GimnasioUTN = new Gimnasio("GimnasioUTN", 50, "Av. Dorrego 281");
@@ -19,9 +20,9 @@ public class Main {
         Recepcionista recepcionista3 = new Recepcionista("Luis", "Martínez", "11223344", LocalDate.of(2000, 7, 22), 3900, "16:00 a 20:00");
 
         //Creacion instancias Especialidades
-        Especialidad especialidadFuncional = new Especialidad("Entrenamiento funcional", eEspecialidad.funcional);
-        Especialidad especialidadMusculacion = new Especialidad("Entrenamiento de musculación", eEspecialidad.musculacion);
-        Especialidad especialidadBoxeo = new Especialidad("Entrenamiento de boxeo", eEspecialidad.boxeo);
+        Especialidad especialidadFuncional = new Especialidad("Entrenamiento funcional", eEspecialidad.FUNCIONAL);
+        Especialidad especialidadMusculacion = new Especialidad("Entrenamiento de musculación", eEspecialidad.MUSCULACICION);
+        Especialidad especialidadBoxeo = new Especialidad("Entrenamiento de boxeo", eEspecialidad.BOXEO);
 
         //Creacion instancias Tipos de membresia
         Membresia membresiaBasica = new Membresia("Membresía básica con acceso limitado", eTIPOMEMBRESIA.membresiaBasica, 1500);

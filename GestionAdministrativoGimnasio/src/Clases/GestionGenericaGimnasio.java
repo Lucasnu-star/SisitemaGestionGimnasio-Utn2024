@@ -3,6 +3,7 @@ package Clases;
 import java.time.LocalDate;
 import java.util.*;
 import Enums.eEspecialidad;
+import Enums.eTIPOMEMBRESIA;
 
 /**
  * Clase GestionGimnasio, esta clase...
@@ -92,14 +93,46 @@ public class GestionGenericaGimnasio<T>  {
         return entrenador;
     }
 
-    /*
-    //modificar entrenador
-    public Entrenador modificarEntrenador(){
-        Entrenador entrenador = new Entrenador();
+
+
+
+///crear miembro
+    public Miembro crearMiembro() {
+        Miembro miembro = new Miembro();
+        Membresia membresia = new Membresia();  // Crear instancia de Membresia
         Scanner entrada = new Scanner(System.in);
-        System.out.println("ingrese el nuevo documento");
-        entrenador.setDocumento(entrada.nextLine());
+
+        // Solicitar datos del miembro
+        System.out.println("Ingrese el nombre del miembro:");
+        miembro.setNombre(entrada.nextLine());
+        System.out.println("Ingrese apellido del miembro:");
+        miembro.setApellido(entrada.nextLine());
+        System.out.println("Ingrese documento del miembro:");
+        miembro.setDocumento(entrada.nextLine());
+        System.out.println("Ingrese fecha de nacimiento (YYYY-MM-DD):");
+        miembro.setFechaNacimiento(LocalDate.parse(entrada.nextLine()));
+
+        // Selección de membresía
+        System.out.println("Seleccione su membresía:");
+        eTIPOMEMBRESIA[] membresias = eTIPOMEMBRESIA.values();
+        for (int i = 0; i < membresias.length; i++) {
+            System.out.println((i + 1) + ". " + membresias[i].name());
+        }
+
+        int opcionMembresia = entrada.nextInt();
+        while (opcionMembresia < 1 || opcionMembresia > membresias.length) {
+            System.out.println("Opción no válida. Por favor seleccione una opción válida.");
+            opcionMembresia = entrada.nextInt();
+        }
+
+        // Asignar el valor de membresía al objeto Membresia
+        membresia.setTipomembresia(membresias[opcionMembresia - 1]); // Asignamos el tipo de membresía
+
+        // Asignamos la membresía al miembro
+        miembro.setMembresia(membresia);
+
+        return miembro;
     }
 
-     */
+
 }
