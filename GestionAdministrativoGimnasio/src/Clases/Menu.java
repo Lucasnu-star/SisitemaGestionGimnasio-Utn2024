@@ -110,50 +110,82 @@ public class Menu {
         } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
     }
 
-    // Submenú de miembros
-    public static void mostrarMenuMiembros(Scanner scanner) {
-        int opcion;
-        do {
-            System.out.println("\nMenú miembros:");
-            System.out.println("1. Mostrar miembros");
-            System.out.println("2. Consultar miembro");
-            System.out.println("3. Agregar miembro");
-            System.out.println("4. Modificar miembro");
-            System.out.println("5. Eliminar miembro");
-            System.out.println("6. Guardar en archivo");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Ingrese una opción: ");
-            opcion = scanner.nextInt();
+*/
 
-            switch (opcion) {
-                case 1:
-                    System.out.println("Mostrar miembros...");
-                    break;
-                case 2:
-                    System.out.println("Consultar miembro...");
-                    break;
-                case 3:
-                    System.out.println("Agregar miembro...");
-                    break;
-                case 4:
-                    System.out.println("Modificar miembro...");
-                    break;
-                case 5:
-                    System.out.println("Eliminar miembro...");
-                    break;
-                case 6:
-                    System.out.println("Guardar en archivo...");
-                    break;
-                case 0:
-                    System.out.println("Volviendo al Menú Principal...");
-                    break;
-                default:
-                    System.out.println("Opción no válida, por favor intente nuevamente.");
-            }
-        } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menu principal
-    }
 
-    // Submenú de máquinas
+     //Submenú de miembros
+     public static void mostrarMenuMiembros(Gimnasio gym) {
+         Scanner teclado = new Scanner(System.in);
+         Recepcionista recepcionista = new Recepcionista();
+         GestionGenericaGimnasio<Miembro> gestionMiembros = new GestionGenericaGimnasio<>();
+         int opcion;
+
+         do {
+             System.out.println("\nMenú miembros:");
+             System.out.println("1. Mostrar Miembros");
+             System.out.println("2. Consultar Miembro");
+             System.out.println("3. Agregar Miembro");
+             System.out.println("4. Modificar Miembro");
+             System.out.println("5. Eliminar Miembro");
+             System.out.println("6. Ver lista");
+             System.out.println("0. Volver al Menú Principal");
+             System.out.print("Ingrese una opción: ");
+             opcion = teclado.nextInt();
+
+             switch (opcion) {
+                 case 1:
+                     System.out.println("Mostrar miembros...");
+                     recepcionista.mostrarElementosLista(gym.getGestionMiembros());
+                     break;
+                 case 2:
+                     System.out.println("Consultar miembro...");
+                     Scanner tecladoMiembro = new Scanner(System.in);
+                     System.out.println("Ingrese DNI del miembro a buscar...");
+                     String dni = tecladoMiembro.nextLine();
+                     Miembro miembroConsultado = recepcionista.consultar(gym.getGestionMiembros(), dni);
+                     if (miembroConsultado != null) {
+                         System.out.println(miembroConsultado);
+                     } else {
+                         System.out.println("Miembro no encontrado.");
+                     }
+                     break;
+                 case 3:
+                     System.out.println("Agregar miembro...");
+                     Miembro nuevoMiembro = gestionMiembros.crearMiembro();
+                     recepcionista.agregarDeLista(gym.getGestionMiembros(), nuevoMiembro.getDocumento(), nuevoMiembro);
+                     JSONArchivos.exportarListaMiembros(gym);
+                     break;
+                 case 4:
+                     System.out.println("Modificar miembro...");
+                     Scanner scan = new Scanner(System.in);
+                     System.out.println("Ingrese el DNI del miembro a modificar:");
+                     String documento = scan.nextLine();
+                     Recepcionista.modificarMiembro(documento, gym.getGestionMiembros());
+                     break;
+                 case 5:
+                     System.out.println("Eliminar miembro...");
+                     Scanner scanEliminar = new Scanner(System.in);
+                     System.out.println("Ingrese DNI del miembro a eliminar:");
+                     String dniEliminar = scanEliminar.nextLine();
+                     recepcionista.eliminarDeLista(gym.getGestionMiembros(), dniEliminar);
+                     JSONArchivos.eliminarMiembroPorDni(dniEliminar, "Miembros.json");
+                     break;
+                 case 6:
+                     System.out.println("Ver lista de miembros...");
+                     JSONArchivos.importarMiembrosDesdeJson(gym);
+                     break;
+                 case 0:
+                     System.out.println("Volviendo al Menú Principal...");
+                     break;
+                 default:
+                     System.out.println("Opción no válida, por favor intente nuevamente.");
+             }
+         } while (opcion != 0);  // Cuando se ingresa 0 se vuelve al menú principal
+     }
+
+
+        /*
+     Submenú de máquinas
     public static void mostrarMenuMaquinas(Scanner scanner) {
         int opcion;
         do {
@@ -308,7 +340,7 @@ public class Menu {
                     break;
                 case 2:
                     // Llamar miembros
-                    System.out.println("bbbb");
+                    Menu.mostrarMenuMiembros(gym);
                     break;
                 case 3:
                     // Llamar maquinas

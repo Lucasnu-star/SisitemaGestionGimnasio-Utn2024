@@ -21,7 +21,7 @@ public final class Miembro extends Usuario{
     public Miembro(String nombre, String apellido, String documento, LocalDate fechaNacimiento, Membresia membresia, boolean estadoMembresia, LocalDate fechaIncripcion) {
         super(nombre, apellido, documento, fechaNacimiento);
         this.membresia = membresia;
-        this.estadoMembresia = estadoMembresia;
+        this.estadoMembresia = true;
         this.fechaIncripcion = fechaIncripcion;
     }
     public Miembro(){

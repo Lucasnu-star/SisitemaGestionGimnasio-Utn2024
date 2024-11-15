@@ -97,9 +97,9 @@ public final class JSONArchivos {
             jsonObject.put("apellido", miembro.getApellido());
             jsonObject.put("documento", miembro.getDocumento());
             jsonObject.put("fechaNacimiento", miembro.getFechaNacimiento().toString());
-            jsonObject.put("membresia", membresiaToJsonObject(miembro.getMembresia()));
-            jsonObject.put("estadoMembresia", miembro.isEstadoMembresia());
             jsonObject.put("fechaIncripcion", miembro.getFechaIncripcion());
+            jsonObject.put("descripcion", membresiaToJsonObject(miembro.getMembresia()));
+            jsonObject.put("estadoMembresia", miembro.isEstadoMembresia());
             jsonArray.put(jsonObject);
         }
         return jsonArray;
@@ -270,16 +270,33 @@ public final class JSONArchivos {
     public static Membresia importarMembresiaDesdeJson(JSONObject jsonObject){
         Membresia membresia = new Membresia();
         try {
-            membresia.setDescripcion(jsonObject.getString("descripcion"));
-            String tipo = jsonObject.getString("tipoMembresia");
-            eTIPOMEMBRESIA tipomembresia = eTIPOMEMBRESIA.valueOf(tipo);
-            membresia.setTipomembresia(tipomembresia);
-            membresia.setCostoMensual(jsonObject.getInt("costoMensual"));
-        }catch (IllegalArgumentException e){
+            if (jsonObject.has("descripcion")) {
+                membresia.setDescripcion(jsonObject.getString("descripcion"));
+            } else {
+                System.out.println("Clave 'descripcion' no encontrada.");
+                membresia.setDescripcion(""); // o asigna un valor predeterminado
+            }
+
+            if (jsonObject.has("tipoMembresia")) {
+                String tipo = jsonObject.getString("tipoMembresia");
+                eTIPOMEMBRESIA tipomembresia = eTIPOMEMBRESIA.valueOf(tipo);
+                membresia.setTipomembresia(tipomembresia);
+            } else {
+                System.out.println("Clave 'tipoMembresia' no encontrada.");
+            }
+
+            if (jsonObject.has("costoMensual")) {
+                membresia.setCostoMensual(jsonObject.getInt("costoMensual"));
+            } else {
+                System.out.println("Clave 'costoMensual' no encontrada.");
+            }
+
+        } catch (IllegalArgumentException e){
             e.printStackTrace();
         }
         return membresia;
     }
+
 
 
     // Importar Maquinas desde archivo JSON
@@ -419,6 +436,44 @@ public final class JSONArchivos {
                 System.out.println("Entrenador con dni " + dni + " eliminado correctamente.");
             } else {
                 System.out.println("No se encontró un entrenador con el dni: " + dni);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al leer o escribir el archivo: " + e.getMessage());
+        }
+    }
+
+    //eliminar de json miembro por dni
+    public static void eliminarMiembroPorDni(String dni, String archivoJson) {
+        try {
+            // Leer el archivo JSON
+            FileReader reader = new FileReader(archivoJson);
+            JSONTokener tokener = new JSONTokener(reader);
+            JSONArray jsonArray = new JSONArray(tokener);
+
+            boolean miembroEliminado = false;
+
+            // Buscar el miembro por dni
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject miembro = jsonArray.getJSONObject(i);
+                if (miembro.getString("documento").equals(dni)) {
+                    jsonArray.remove(i); // Eliminar el elemento en el índice i
+                    miembroEliminado = true;
+                    break;
+                }
+            }
+
+            // Verificar si se eliminó el miembro
+            if (miembroEliminado) {
+                // Sobrescribir el archivo JSON con los datos modificados
+                FileWriter writer = new FileWriter(archivoJson);
+                writer.write(jsonArray.toString());
+                writer.flush();
+                writer.close();
+                System.out.println("Miembro con dni " + dni + " eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró un miembro con el dni: " + dni);
             }
 
         } catch (IOException e) {

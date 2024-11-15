@@ -4,9 +4,14 @@ import Excepciones.ExcepcionMembresiaExpirada;
 import Interfaces.iReportarMaquina;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -125,6 +130,44 @@ public final class Recepcionista extends Empleado {
 
         if (!entrenadorEncontrado) {
             System.out.println("No se encontró un entrenador con el documento: " + dni);
+        }
+    }
+
+    //modificar miembro
+
+
+    public static void modificarMiembro(String dni, GestionGenericaGimnasio<Miembro> lista) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Solicitar el nuevo nombre
+        System.out.println("Ingresa el nuevo nombre:");
+        String nuevoNombre = scanner.nextLine();
+
+        // Solicitar la nueva fecha de nacimiento (formato: yyyy-MM-dd)
+        System.out.println("Ingresa la nueva fecha de nacimiento (formato: yyyy-MM-dd):");
+        String nuevaFechaNacimientoStr = scanner.nextLine();
+
+        // Convertir la cadena de texto a LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoStr, formatter);
+
+        boolean miembroEncontrado = false;
+
+        // Buscar al miembro en la lista por su DNI
+        for (Map.Entry<String, Miembro> entry : lista.getGestionUsuario().entrySet()) {
+            if (entry.getKey().equals(dni)) {
+
+                Miembro miembro = entry.getValue();
+                miembro.setNombre(nuevoNombre); // Modificar el nombre del miembro
+                miembro.setFechaNacimiento(nuevaFechaNacimiento); // Modificar la fecha de nacimiento
+                miembroEncontrado = true;
+                System.out.println("Miembro actualizado: " + miembro);
+                break;
+            }
+        }
+
+        if (!miembroEncontrado) {
+            System.out.println("No se encontró un miembro con el documento: " + dni);
         }
     }
 

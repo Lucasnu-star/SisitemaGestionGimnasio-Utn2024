@@ -110,6 +110,8 @@ public class GestionGenericaGimnasio<T>  {
         miembro.setDocumento(entrada.nextLine());
         System.out.println("Ingrese fecha de nacimiento (YYYY-MM-DD):");
         miembro.setFechaNacimiento(LocalDate.parse(entrada.nextLine()));
+        System.out.println("ingrese su fecha de inscripcion (YYYY-MM-DD):");
+        miembro.setFechaIncripcion(LocalDate.parse(entrada.nextLine()));
 
         // Selección de membresía
         System.out.println("Seleccione su membresía:");
@@ -127,8 +129,22 @@ public class GestionGenericaGimnasio<T>  {
         // Asignar el valor de membresía al objeto Membresia
         membresia.setTipomembresia(membresias[opcionMembresia - 1]); // Asignamos el tipo de membresía
 
+        // Asignamos el costo mensual dependiendo del tipo de membresía
+        switch (membresias[opcionMembresia - 1]) {
+            case membresiaBasica:
+                membresia.setCostoMensual(300); // Costo mensual para membresía anual
+                break;
+            case membresiaPremium:
+                membresia.setCostoMensual(700); // Costo mensual para membresía semestral
+                break;
+            default:
+                System.out.println("Opción de membresía no válida.");
+                break;
+        }
+
         // Asignamos la membresía al miembro
         miembro.setMembresia(membresia);
+
 
         return miembro;
     }
